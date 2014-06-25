@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.1 (http://folderlist.kucharskov.tk)
+ *	FolderList v2.2 (http://folderlist.kucharskov.tk)
  *	with love by M. Kucharskov (http://kucharskov.tk)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
@@ -22,7 +22,7 @@
  */
 $FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site
 $FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
-$FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
+$FL_CONFIG["ShowLoadTime"] = 1;																			//Set to 1 to show page load time
 $FL_CONFIG["Hidden"] = array("index.php", ".htaccess", ".htpasswd");									//Files and folders what you won't to show
 $FL_CONFIG["Language"] = "en";																			//Script Language (en, pl, ru, de)
 $FL_CONFIG["Password"] = "";																			//Password to login, if you won't password leave empty
@@ -273,9 +273,6 @@ if($_GET["dir"]) {
 	$FL_FolderCheck = "/";
 }
 
-//Translation security
-if(!$FL_TRANSLATION[$FL_CONFIG["Language"]]) $FL_CONFIG["Language"] = "en";
-
 //Checking files and folders
 foreach(glob($FL_Folder, GLOB_BRACE) as $FL_Element) {
 	if(!in_array($FL_Element, $FL_CONFIG["Hidden"])) {
@@ -310,6 +307,15 @@ function DrawTableRow($error, $icon, $text, $size) {
 	echo "<td>{$text}</td>\n";	
 	echo "<td>{$size}</td>\n";
 	echo "</tr>\n";
+}
+
+//Function ShowText with multilang text security
+function ShowText($string) {
+	global $FL_CONFIG;
+	global $FL_TRANSLATION;
+
+	if(!$FL_TRANSLATION[$FL_CONFIG["Language"]][$string]) return $FL_TRANSLATION["en"][$string];
+	else return $FL_TRANSLATION[$FL_CONFIG["Language"]][$string];
 }
 
 //Function Extension to return extension of file
@@ -402,6 +408,8 @@ function GetFormatedSize($file) {
 </head>
 <body>
 
+<?php var_dump($_GET["dir"]); ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -414,10 +422,10 @@ function GetFormatedSize($file) {
 						if($FL_CONFIG["ShowDir"]) {
 							//If user is in main folder, show only main string
 							if(!$_GET["dir"]) {
-								echo "<li class=\"active\">{$FL_TRANSLATION[$FL_CONFIG["Language"]]["MainFolder"]}</li>\n";
+								echo "<li class=\"active\">".ShowText("MainFolder")."</li>\n";
 							} else {
 								//Else show directores with links
-								echo "<li><a href=\"?dir=\">{$FL_TRANSLATION[$FL_CONFIG["Language"]]["MainFolder"]}</a></li>\n";
+								echo "<li><a href=\"?dir=\">".ShowText("MainFolder")."</a></li>\n";
 								$FL_ManyFolders = count($FL_FolderLocs)-2;
 
 								for($FL_LocNum = 0; $FL_LocNum <= $FL_ManyFolders; $FL_LocNum++) {
@@ -444,8 +452,8 @@ function GetFormatedSize($file) {
 								<div class="form-group <?php if($FL_LoginError == 1) echo "has-error"; ?> ">
 									<label class="control-label" for="password">
 									<?php 
-									if($FL_LoginError == 1) echo $FL_TRANSLATION[$FL_CONFIG["Language"]]["BadPass"];
-									else echo $FL_TRANSLATION[$FL_CONFIG["Language"]]["LoginToSee"];
+									if($FL_LoginError == 1) echo ShowText("BadPass");
+									else echo ShowText("LoginToSee");
 									?>
 									</label>
 									<div class="input-group">
@@ -469,8 +477,8 @@ function GetFormatedSize($file) {
 					<thead>
 						<tr>
 							<th scope="col"></th>
-							<th class="col-lg-10 col-md-10 col-sm-10 col-xs-10" scope="col"><?php echo $FL_TRANSLATION[$FL_CONFIG["Language"]]["FileName"]; ?></th>
-							<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2" scope="col"><?php echo $FL_TRANSLATION[$FL_CONFIG["Language"]]["FileSize"]; ?></th>
+							<th class="col-lg-10 col-md-10 col-sm-10 col-xs-10" scope="col"><?php echo ShowText("FileName"); ?></th>
+							<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2" scope="col"><?php echo ShowText("FileSize"); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -478,13 +486,13 @@ function GetFormatedSize($file) {
 						//If user is in avalibe folder
 						if(AboveDir($FL_FolderCheck, __DIR__)) {
 							DrawTableRow(0, "back", "<a href=\"?dir=\">..</a>", "");
-							DrawTableRow(1, "warning", $FL_TRANSLATION[$FL_CONFIG["Language"]]["NoAccess"], "");
+							DrawTableRow(1, "warning", ShowText("NoAccess"), "");
 						} else {
 							//If user is in folder, show back arrow
 							if($_GET["dir"]) DrawTableRow(0, "back", "<a href=\"?dir={$FL_FolderUp}\">..</a>", "");
 							//If folder don't contain any files, show an error
 							if(count($FL_Folders) == 0 && count($FL_Files) == 0) {
-								DrawTableRow(1, "warning", $FL_TRANSLATION[$FL_CONFIG["Language"]]["NoFiles"], "");
+								DrawTableRow(1, "warning", ShowText("NoFiles"), "");
 							} else {
 								//Main loops to show folders and files
 								if(count($FL_Folders) != 0) {
@@ -520,16 +528,16 @@ function GetFormatedSize($file) {
 					$FL_Time["End"] = microtime(true);
 					$FL_Time = round(($FL_Time["End"]-$FL_Time["Start"]), 2);
 					
-					$FL_TRANSLATION[$FL_CONFIG["Language"]]["LoadTime"] = str_replace("[FL_TIME]", $FL_Time, $FL_TRANSLATION[$FL_CONFIG["Language"]]["LoadTime"]);
-					echo "{$FL_TRANSLATION[$FL_CONFIG["Language"]]["LoadTime"]} | ";
+					$FL_Time = str_replace("[FL_TIME]", $FL_Time, ShowText("LoadTime"));
+					echo "{$FL_Time} | ";
 				}
 				?>
 				<a target="_blank" href="http://folderlist.kucharskov.tk">FolderList</a>
 				<?php
 				//If password exist and user are logged, show "logout"
 				if ($FL_CONFIG["Password"] != "" && $_SESSION["FL_LOGIN"] == $FL_CONFIG["Password"]) {
-					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">{$FL_TRANSLATION[$FL_CONFIG["Language"]]["logout"]}</a>";
-					else echo " | <a href=\"?logout=1\">{$FL_TRANSLATION[$FL_CONFIG["Language"]]["logout"]}</a>";
+					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">".ShowText("logout")."</a>";
+					else echo " | <a href=\"?logout=1\">".ShowText("logout")."</a>";
 				}
 				?>
 			</div>
