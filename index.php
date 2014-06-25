@@ -249,10 +249,10 @@ $FL_Name = pathinfo(__FILE__);
 $FL_Name = $FL_Name["basename"];
 
 //Password protection session
-if($FL_CONFIG["Password"] != "") {
+if($FL_CONFIG["Password"] !== "") {
 	session_name("FolderList");
 	session_start();
-	if(isset($_POST["password"]) && $_POST["password"] == $FL_CONFIG["Password"]) $_SESSION["FL_LOGIN"] = $FL_CONFIG["Password"];
+	if(isset($_POST["password"]) && $_POST["password"] === $FL_CONFIG["Password"]) $_SESSION["FL_LOGIN"] = $FL_CONFIG["Password"];
 	if($_GET["logout"]) {
 		session_destroy();
 		if($_GET["dir"]) header("Location: {$FL_Name}?dir={$_GET["dir"]}");
@@ -283,9 +283,9 @@ foreach(glob($FL_Folder, GLOB_BRACE) as $FL_Element) {
 
 //Function AboveDir to check where user can go
 function AboveDir($dir, $dir_top){
-	if($dir == "/") $dir = __DIR__;
+	if($dir === "/") $dir = __DIR__;
 	
-	if($dir == $dir_top) return false;
+	if($dir === $dir_top) return false;
 	
 	$dir = realpath($dir);
 	$dir_top = realpath($dir_top);
@@ -440,8 +440,8 @@ function GetFormatedSize($file) {
 				</div>
 				<?php
 				//If password exist and user are not logged
-				if($FL_CONFIG["Password"] != "" && $_SESSION["FL_LOGIN"] != $FL_CONFIG["Password"]) {
-					if(isset($_POST["password"]) && $_POST["password"] != $FL_CONFIG["Password"]) $FL_LoginError = 1;
+				if($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] !== $FL_CONFIG["Password"]) {
+					if(isset($_POST["password"]) && $_POST["password"] !== $FL_CONFIG["Password"]) $FL_LoginError = 1;
 				?>
 				<div class="panel-body">				
 					<form action="<?php echo $FL_Name; if($_GET["dir"]) echo "?dir={$_GET["dir"]}"; ?>" method="post">
@@ -469,7 +469,7 @@ function GetFormatedSize($file) {
 				}
 
 				//If password does not exist or if usser are logged
-				if($FL_CONFIG["Password"] == "" || ($FL_CONFIG["Password"] != "" && $_SESSION["FL_LOGIN"] == $FL_CONFIG["Password"])) {
+				if($FL_CONFIG["Password"] === "" || ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"])) {
 				?>
 				<table class="table table-condensed table-striped table-hover">
 					<thead>
@@ -533,7 +533,7 @@ function GetFormatedSize($file) {
 				<a target="_blank" href="http://folderlist.kucharskov.tk">FolderList</a>
 				<?php
 				//If password exist and user are logged, show "logout"
-				if ($FL_CONFIG["Password"] != "" && $_SESSION["FL_LOGIN"] == $FL_CONFIG["Password"]) {
+				if ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"]) {
 					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">".ShowText("logout")."</a>";
 					else echo " | <a href=\"?logout=1\">".ShowText("logout")."</a>";
 				}
