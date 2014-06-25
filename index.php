@@ -457,7 +457,7 @@ function GetFormatedSize($file) {
 									<div class="input-group">
 										<input type="password" name="password" id="password" class="form-control">
 										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit"><?php echo $FL_TRANSLATION[$FL_CONFIG["Language"]]["login"]; ?></button>
+											<button class="btn btn-default" type="submit"><?php echo ShowText("login"); ?></button>
 										</span>
 									</div>
 								</div>
