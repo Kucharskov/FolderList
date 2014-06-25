@@ -22,7 +22,7 @@
  */
 $FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site
 $FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
-$FL_CONFIG["ShowLoadTime"] = 1;																			//Set to 1 to show page load time
+$FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
 $FL_CONFIG["Hidden"] = array("index.php", ".htaccess", ".htpasswd");									//Files and folders what you won't to show
 $FL_CONFIG["Language"] = "en";																			//Script Language (en, pl, ru, de)
 $FL_CONFIG["Password"] = "";																			//Password to login, if you won't password leave empty
@@ -407,8 +407,6 @@ function GetFormatedSize($file) {
 	<![endif]-->	
 </head>
 <body>
-
-<?php var_dump($_GET["dir"]); ?>
 
 <div class="container">
 	<div class="row">
