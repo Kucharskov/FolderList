@@ -1,5 +1,6 @@
 FolderList v2.2
      * Changed security when choose not available translation to security per string
+	 * Simplified showing page load time  
 
 FolderList v2.1
      * New License - Creative Commons BY-NC-SA
