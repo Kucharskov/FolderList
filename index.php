@@ -361,6 +361,7 @@ function GetFormatedSize($file) {
 	.panel-heading h1 {
 		text-align: center;
 		margin: 20px 0;
+		word-wrap: break-word;
 	}
 	
 	.panel-heading .breadcrumb {
