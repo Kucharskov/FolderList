@@ -1,7 +1,8 @@
 FolderList v2.2
+     * New .pl domain
      * Changed security when choose not available translation to security per string
-	 * Simplified showing page load time
-	 * [GitHub][Cysioland] Changed equals in passwor checking
+     * Simplified showing page load time
+     * [GitHub][Cysioland] Changed equals in passwor checking
 
 FolderList v2.1
      * New License - Creative Commons BY-NC-SA

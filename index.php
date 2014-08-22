@@ -1,8 +1,8 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.2 (http://folderlist.kucharskov.tk)
- *	with love by M. Kucharskov (http://kucharskov.tk)
+ *	FolderList v2.2 (http://folderlist.kucharskov.pl)
+ *	with love by M. Kucharskov (http://kucharskov.pl)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
  *	This is free software and it's distributed under Creative Commons BY-NC-SA License.
@@ -345,7 +345,7 @@ function GetFormatedSize($file) {
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="generator" content="FolderList (http://folderlist.kucharskov.tk)">
+	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
 
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
@@ -530,7 +530,7 @@ function GetFormatedSize($file) {
 					echo "{$FL_Time} | ";
 				}
 				?>
-				<a target="_blank" href="http://folderlist.kucharskov.tk">FolderList</a>
+				<a target="_blank" href="http://folderlist.kucharskov.pl">FolderList</a>
 				<?php
 				//If password exist and user are logged, show "logout"
 				if ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"]) {
