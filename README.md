@@ -1,4 +1,4 @@
-﻿[FolderList](http://folderlist.kucharskov.tk)
+﻿[FolderList](http://folderlist.kucharskov.pl)
 ======
 
 Co to jest?
@@ -25,7 +25,7 @@ Małego rozmiaru!
 -----------
 Mimo dość rozbudowanego systemu i ilości funkcji, FolderList mieści się jedynie w jednym pliku, zawierając ustawienia, komunikaty a nawet ikony!
 
-[FolderList](http://folderlist.kucharskov.tk/?lang=en)
+[FolderList](http://folderlist.kucharskov.pl/?lang=en)
 ======
 
 What's this?
