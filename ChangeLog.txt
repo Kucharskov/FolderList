@@ -1,3 +1,6 @@
+FolderList v2.2.1
+     * Updated binaries
+
 FolderList v2.2
      * New .pl domain
      * Changed security when choose not available translation to security per string

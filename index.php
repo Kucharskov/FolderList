@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.2 (http://folderlist.kucharskov.pl)
+ *	FolderList v2.2.1 (http://folderlist.kucharskov.pl)
  *	with love by M. Kucharskov (http://kucharskov.pl)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
@@ -347,7 +347,7 @@ function GetFormatedSize($file) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
 
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	<!--
 	.panel {
@@ -400,10 +400,10 @@ function GetFormatedSize($file) {
 	-->
 	</style>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->	
 </head>
