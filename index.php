@@ -192,6 +192,15 @@ mK7Q6Qsnq54sj2gBplS896RpSpIkjI2NjVZitdh7jAOSK6trXcpC2GjlfP1esHD+GDYozjm893jvSZJk
 w/pGxBrl1tVpJCrWWpxzI6GRgOQKCv2BYHPl5uUatROeSsVy7eIkU9UUiYoxBgDnHNbagw4U6yAWwpmphNvXT6HAhAZuLNRx1iDD
 WzHG/L6ZEbyJVLa2c54/PgsKgyzw5MHcqKC9nROK/aaDvwN4KYS7j959DHk2PtuYnBUBFUEVVBQRgzX7I/wNM7RmgEshhFXAcDSI
 9/6KHQZKAYkxDgA5SnOMcReI5kCcG8M42yM6iMDmL261eaOOnqrOAAAAAElFTkSuQmCC";
+$_IMAGES["video"] = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ
+2VSZWFkeXHJZTwAAAIfSURBVDjLpZNPaBNBGMXfbrubzBqbg4kL0lJLgiVKE/AP6Kl6UUFQNAeDIAjVS08aELx59GQPAREV/4Bei
+qcqROpRD4pUNCJSS21OgloISWMEZ/aPb6ARdNeTCz92mO+9N9/w7RphGOJ/nsH+olqtvg+CYJR8q9VquThxuVz+oJTKeZ63Uq/XC
+38E0Jj3ff8+OVupVGLbolkzQw5HOqAxQU4wXWWnZrykmYD0QsgAOJe9hpEUcPr8i0GaJ8n2vs/sL2h8R66TpVfWTdETHWE6GRGKj
+GiiKNLii5BSLpN7pBHpgMYhMkm8tPUWz3sL2D1wFaY/jvnWcTTaE5DyjMfTT5J0XIAiTRYn3ASwZ1MKbTmN7z+KaHUOYqmb1fcPi
+Na4kQBuyvWAHYfcHGzDgYcx9NKrwJYHCAyF21JiPWBnXMAQOea6bmn+4ueYGZi8gtymNVobF7BG5prNpjd+eW6X4BSUD0gOdCpzA
+8MpA/v2v15kl4+pK0emwHSbjJGBlz+vYM1fQeDrYOBTdzOGvDf6EFNr+LYjHbBgsaCLxr+moNQjU2vYhRXpgIUOmSWWnsJRfjlOZ
+hrexgtYDZ/gWbetNRbNs6QT10GJglNk64HMaGgbAkoMo5fiFNy7CKDQUGqE5r38YktxAfSqW7Zt33l66WtkAkACjuNsaLVaDxlw5
+HdJ/86aYrG4WCgUZD6fX+jv/U0ymfxoWVZomuZyf+8XqfGP49CCrBUAAAAASUVORK5CYII=";
 
 //Images return when ?img= GET call
 if(isset($_GET["img"]) && !isset($_GET["dir"])) {
@@ -206,34 +215,61 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 		case "gzip": echo base64_decode($FL_IMAGES["archive"]); break;
 		case "rar": echo base64_decode($FL_IMAGES["archive"]); break;
 		case "tar": echo base64_decode($FL_IMAGES["archive"]); break;
+		case "tgz": echo base64_decode($FL_IMAGES["archive"]); break;
 		case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
-		
+
+		case "aac": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "ac3": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "m4a": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "mid": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "midi": echo base64_decode($FL_IMAGES["audio"]); break;
 		case "mp3": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "ogg": echo base64_decode($FL_IMAGES["audio"]); break;
 		case "wav": echo base64_decode($FL_IMAGES["audio"]); break;
-		
+		case "wave": echo base64_decode($FL_IMAGES["audio"]); break;
+
+		case "css": echo base64_decode($FL_IMAGES["code"]); break;
 		case "html": echo base64_decode($FL_IMAGES["code"]); break;
+		case "php": echo base64_decode($FL_IMAGES["code"]); break;
 		case "xhtml": echo base64_decode($FL_IMAGES["code"]); break;
 		case "xml": echo base64_decode($FL_IMAGES["code"]); break;
-		
+
+		case "ods": echo base64_decode($FL_IMAGES["excel"]); break;
 		case "xls": echo base64_decode($FL_IMAGES["excel"]); break;
 		case "xlsx": echo base64_decode($FL_IMAGES["excel"]); break;
-		
+
 		case "bmp": echo base64_decode($FL_IMAGES["image"]); break;
 		case "gif": echo base64_decode($FL_IMAGES["image"]); break;
+		case "jpe": echo base64_decode($FL_IMAGES["image"]); break;
 		case "jpg": echo base64_decode($FL_IMAGES["image"]); break;
 		case "jpeg": echo base64_decode($FL_IMAGES["image"]); break;
 		case "png": echo base64_decode($FL_IMAGES["image"]); break;
+		case "tga": echo base64_decode($FL_IMAGES["image"]); break;
+		case "tif": echo base64_decode($FL_IMAGES["image"]); break;
+		case "tiff": echo base64_decode($FL_IMAGES["image"]); break;
 
+		case "odp": echo base64_decode($FL_IMAGES["ppoint"]); break;
 		case "ppt": echo base64_decode($FL_IMAGES["ppoint"]); break;
 		case "pptx": echo base64_decode($FL_IMAGES["ppoint"]); break;
-		
+
 		case "cfg": echo base64_decode($FL_IMAGES["text"]); break;
 		case "ini": echo base64_decode($FL_IMAGES["text"]); break;
 		case "txt": echo base64_decode($FL_IMAGES["text"]); break;
-		
+
 		case "doc": echo base64_decode($FL_IMAGES["word"]); break;
 		case "docx": echo base64_decode($FL_IMAGES["word"]); break;
-		
+		case "odt": echo base64_decode($FL_IMAGES["word"]); break;
+
+		case "3gp": echo base64_decode($FL_IMAGES["video"]); break;
+		case "3g2": echo base64_decode($FL_IMAGES["video"]); break;
+		case "avi": echo base64_decode($FL_IMAGES["video"]); break;
+		case "m2t": echo base64_decode($FL_IMAGES["video"]); break;
+		case "mp4": echo base64_decode($FL_IMAGES["video"]); break;
+		case "mpg": echo base64_decode($FL_IMAGES["video"]); break;
+		case "mpeg": echo base64_decode($FL_IMAGES["video"]); break;
+		case "mov": echo base64_decode($FL_IMAGES["video"]); break;
+		case "wmv": echo base64_decode($FL_IMAGES["video"]); break;
+
 		case "warning": echo base64_decode($FL_IMAGES["warning"]); break;
 		case "back": echo base64_decode($FL_IMAGES["back"]); break;
 		case "folder": echo base64_decode($FL_IMAGES["folder"]); break;
