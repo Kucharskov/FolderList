@@ -207,87 +207,16 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 	header("Content-type: image/png");
 	switch(strtolower($_GET["img"])) {
 		default: echo base64_decode($FL_IMAGES["unknown"]); break;
-		
 		case "pdf": echo base64_decode($FL_IMAGES["adobe"]); break;
-		
-		case "7z":
-		case "cab":
-		case "gzip":
-		case "rar":
-		case "tar":
-		case "tgz":
-		case "zip":
-			echo base64_decode($FL_IMAGES["archive"]);
-			break;
-
-		case "aac":
-		case "ac3":
-		case "m4a":
-		case "mid":
-		case "midi":
-		case "mp3":
-		case "ogg":
-		case "wav":
-		case "wave":
-			echo base64_decode($FL_IMAGES["audio"]);
-			break;
-
-		case "css":
-		case "html":
-		case "php":
-		case "xhtml":
-		case "xml":
-			echo base64_decode($FL_IMAGES["code"]);
-			break;
-
-		case "ods":
-		case "xls":
-		case "xlsx":
-			echo base64_decode($FL_IMAGES["excel"]);
-			break;
-
-		case "bmp":
-		case "gif":
-		case "jpe":
-		case "jpg":
-		case "jpeg":
-		case "png":
-		case "tga":
-		case "tif":
-		case "tiff":
-			echo base64_decode($FL_IMAGES["image"]);
-			break;
-
-		case "odp":
-		case "ppt":
-		case "pptx":
-			echo base64_decode($FL_IMAGES["ppoint"]);
-			break;
-
-		case "cfg":
-		case "ini":
-		case "txt": 
-			echo base64_decode($FL_IMAGES["text"]);
-			break;
-
-		case "doc":
-		case "docx":
-		case "odt":
-			echo base64_decode($FL_IMAGES["word"]);
-			break;
-
-		case "3gp":
-		case "3g2":
-		case "avi":
-		case "m2t":
-		case "mp4":
-		case "mpg":
-		case "mpeg":
-		case "mov":
-		case "wmv":
-			echo base64_decode($FL_IMAGES["video"]);
-			break;
-
+		case "7z": case "cab": case "gzip": case "rar": case "tar": case "tgz": case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
+		case "aac": case "ac3": case "m4a": case "mid": case "midi": case "mp3": case "ogg": case "wav": case "wave": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "css": case "html": case "php": case "xhtml": case "xml": echo base64_decode($FL_IMAGES["code"]); break;
+		case "ods": case "xls": case "xlsx": echo base64_decode($FL_IMAGES["excel"]); break;
+		case "bmp": case "gif": case "jpe": case "jpg": case "jpeg": case "png": case "tga": case "tif": case "tiff": echo base64_decode($FL_IMAGES["image"]); break; 
+		case "odp": case "ppt": case "pptx": echo base64_decode($FL_IMAGES["ppoint"]); break;
+		case "cfg": case "ini": case "txt": echo base64_decode($FL_IMAGES["text"]); break;
+		case "doc": case "docx": case "odt": echo base64_decode($FL_IMAGES["word"]); break;
+		case "3gp": case "3g2": case "avi": case "m2t": case "mp4": case "mpg": case "mpeg": case "mov": case "wmv": echo base64_decode($FL_IMAGES["video"]); break;
 		case "warning": echo base64_decode($FL_IMAGES["warning"]); break;
 		case "back": echo base64_decode($FL_IMAGES["back"]); break;
 		case "folder": echo base64_decode($FL_IMAGES["folder"]); break;
