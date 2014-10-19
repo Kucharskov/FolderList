@@ -1,6 +1,7 @@
 FolderList v2.2.1
      * Updated binaries
      * Added icons to many new file formats (eg. ogg, tga, odt)
+     * [GitHub][Cysioland] Removed redundant directives in switch statement
 
 FolderList v2.2
      * New .pl domain
