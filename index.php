@@ -210,65 +210,83 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 		
 		case "pdf": echo base64_decode($FL_IMAGES["adobe"]); break;
 		
-		case "7z": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "cab": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "gzip": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "rar": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "tar": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "tgz": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
+		case "7z":
+		case "cab":
+		case "gzip":
+		case "rar":
+		case "tar":
+		case "tgz":
+		case "zip":
+			echo base64_decode($FL_IMAGES["archive"]);
+			break;
 
-		case "aac": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "ac3": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "m4a": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "mid": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "midi": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "mp3": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "ogg": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "wav": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "wave": echo base64_decode($FL_IMAGES["audio"]); break;
+		case "aac":
+		case "ac3":
+		case "m4a":
+		case "mid":
+		case "midi":
+		case "mp3":
+		case "ogg":
+		case "wav":
+		case "wave":
+			echo base64_decode($FL_IMAGES["audio"]);
+			break;
 
-		case "css": echo base64_decode($FL_IMAGES["code"]); break;
-		case "html": echo base64_decode($FL_IMAGES["code"]); break;
-		case "php": echo base64_decode($FL_IMAGES["code"]); break;
-		case "xhtml": echo base64_decode($FL_IMAGES["code"]); break;
-		case "xml": echo base64_decode($FL_IMAGES["code"]); break;
+		case "css":
+		case "html":
+		case "php":
+		case "xhtml":
+		case "xml":
+			echo base64_decode($FL_IMAGES["code"]);
+			break;
 
-		case "ods": echo base64_decode($FL_IMAGES["excel"]); break;
-		case "xls": echo base64_decode($FL_IMAGES["excel"]); break;
-		case "xlsx": echo base64_decode($FL_IMAGES["excel"]); break;
+		case "ods":
+		case "xls":
+		case "xlsx":
+			echo base64_decode($FL_IMAGES["excel"]);
+			break;
 
-		case "bmp": echo base64_decode($FL_IMAGES["image"]); break;
-		case "gif": echo base64_decode($FL_IMAGES["image"]); break;
-		case "jpe": echo base64_decode($FL_IMAGES["image"]); break;
-		case "jpg": echo base64_decode($FL_IMAGES["image"]); break;
-		case "jpeg": echo base64_decode($FL_IMAGES["image"]); break;
-		case "png": echo base64_decode($FL_IMAGES["image"]); break;
-		case "tga": echo base64_decode($FL_IMAGES["image"]); break;
-		case "tif": echo base64_decode($FL_IMAGES["image"]); break;
-		case "tiff": echo base64_decode($FL_IMAGES["image"]); break;
+		case "bmp":
+		case "gif":
+		case "jpe":
+		case "jpg":
+		case "jpeg":
+		case "png":
+		case "tga":
+		case "tif":
+		case "tiff":
+			echo base64_decode($FL_IMAGES["image"]);
+			break;
 
-		case "odp": echo base64_decode($FL_IMAGES["ppoint"]); break;
-		case "ppt": echo base64_decode($FL_IMAGES["ppoint"]); break;
-		case "pptx": echo base64_decode($FL_IMAGES["ppoint"]); break;
+		case "odp":
+		case "ppt":
+		case "pptx":
+			echo base64_decode($FL_IMAGES["ppoint"]);
+			break;
 
-		case "cfg": echo base64_decode($FL_IMAGES["text"]); break;
-		case "ini": echo base64_decode($FL_IMAGES["text"]); break;
-		case "txt": echo base64_decode($FL_IMAGES["text"]); break;
+		case "cfg":
+		case "ini":
+		case "txt": 
+			echo base64_decode($FL_IMAGES["text"]);
+			break;
 
-		case "doc": echo base64_decode($FL_IMAGES["word"]); break;
-		case "docx": echo base64_decode($FL_IMAGES["word"]); break;
-		case "odt": echo base64_decode($FL_IMAGES["word"]); break;
+		case "doc":
+		case "docx":
+		case "odt":
+			echo base64_decode($FL_IMAGES["word"]);
+			break;
 
-		case "3gp": echo base64_decode($FL_IMAGES["video"]); break;
-		case "3g2": echo base64_decode($FL_IMAGES["video"]); break;
-		case "avi": echo base64_decode($FL_IMAGES["video"]); break;
-		case "m2t": echo base64_decode($FL_IMAGES["video"]); break;
-		case "mp4": echo base64_decode($FL_IMAGES["video"]); break;
-		case "mpg": echo base64_decode($FL_IMAGES["video"]); break;
-		case "mpeg": echo base64_decode($FL_IMAGES["video"]); break;
-		case "mov": echo base64_decode($FL_IMAGES["video"]); break;
-		case "wmv": echo base64_decode($FL_IMAGES["video"]); break;
+		case "3gp":
+		case "3g2":
+		case "avi":
+		case "m2t":
+		case "mp4":
+		case "mpg":
+		case "mpeg":
+		case "mov":
+		case "wmv":
+			echo base64_decode($FL_IMAGES["video"]);
+			break;
 
 		case "warning": echo base64_decode($FL_IMAGES["warning"]); break;
 		case "back": echo base64_decode($FL_IMAGES["back"]); break;
