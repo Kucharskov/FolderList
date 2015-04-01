@@ -330,7 +330,7 @@ function GetFormatedSize($file) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
 
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	<!--
 	.panel {
@@ -383,8 +383,8 @@ function GetFormatedSize($file) {
 	-->
 	</style>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -465,7 +465,7 @@ function GetFormatedSize($file) {
 					</thead>
 					<tbody>
 						<?php
-						//If user is in avalibe folder
+						//If user is in no avalibe folder
 						if(AboveDir($FL_FolderCheck, __DIR__)) {
 							DrawTableRow(0, "back", "<a href=\"?dir=\">..</a>", "");
 							DrawTableRow(1, "warning", ShowText("NoAccess"), "");
