@@ -233,6 +233,7 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 		case "warning": echo base64_decode($FL_IMAGES["warning"]); break;
 		case "back": echo base64_decode($FL_IMAGES["back"]); break;
 		case "folder": echo base64_decode($FL_IMAGES["folder"]); break;
+		case base64_decode("ZG9wZWZpc2g="): echo base64_decode($FL_IMAGES["nothing"]); break;
 	}
 	die;
 }
