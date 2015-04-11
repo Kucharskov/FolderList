@@ -1,4 +1,5 @@
 FolderList v2.2.1
+     * Again minimized code and removed many "white" chars
      * Fixed no world-break with loooong filenames
      * Nothing important fix
      * Updated binaries

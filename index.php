@@ -260,11 +260,11 @@ if($FL_CONFIG["Password"] !== "") {
 
 //Getting dirs to usage or show
 if($_GET["dir"]) {
-	$FL_Folder = "{$_GET["dir"]}/*";																	//Folder to foreach items
-	$FL_FolderCheck = str_replace("*", "", $FL_Folder);													//Folder to check security
-	$FL_FolderLocs = explode("/", $FL_FolderCheck);														//Folder to show localization
+	$FL_Folder = "{$_GET["dir"]}/*";												//Folder to foreach items
+	$FL_FolderCheck = str_replace("*", "", $FL_Folder);								//Folder to check security
+	$FL_FolderLocs = explode("/", $FL_FolderCheck);									//Folder to show localization
 	$FL_FolderUp = explode("/", $_GET["dir"]);
-	$FL_FolderUp = substr(str_replace(end($FL_FolderUp), "", $_GET["dir"]), 0, -1);						//Folder UP
+	$FL_FolderUp = substr(str_replace(end($FL_FolderUp), "", $_GET["dir"]), 0, -1);	//Folder UP
 } else {
 	$FL_Folder = "*";
 	$FL_FolderCheck = "/";
@@ -281,14 +281,11 @@ foreach(glob($FL_Folder, GLOB_BRACE) as $FL_Element) {
 //Function AboveDir to check where user can go
 function AboveDir($dir, $dir_top){
 	if($dir === "/") $dir = __DIR__;
-	
 	if($dir === $dir_top) return false;
-	
 	$dir = realpath($dir);
 	$dir_top = realpath($dir_top);
 	$dir = count(explode("/", $dir));
 	$dir_top = count(explode("/", $dir_top));
-	
 	if($dir <= $dir_top) return true;
 	else return false;
 }
@@ -297,10 +294,8 @@ function AboveDir($dir, $dir_top){
 function DrawTableRow($error, $icon, $text, $size) {
 	if($error == 1) echo "<tr class=\"danger\">\n";
 	else echo "<tr>\n";	
-
 	if(!$icon) echo "<td></td>\n";
 	else echo "<td><img src=\"?img={$icon}\"></td>\n";	
-	
 	echo "<td>{$text}</td>\n";	
 	echo "<td>{$size}</td>\n";
 	echo "</tr>\n";
@@ -310,7 +305,6 @@ function DrawTableRow($error, $icon, $text, $size) {
 function ShowText($string) {
 	global $FL_CONFIG;
 	global $FL_TRANSLATION;
-
 	if(!$FL_TRANSLATION[$FL_CONFIG["Language"]][$string]) return $FL_TRANSLATION["en"][$string];
 	else return $FL_TRANSLATION[$FL_CONFIG["Language"]][$string];
 }
@@ -325,12 +319,10 @@ function Extension($file) {
 //Function GetFormatedSize to return formated file size
 function GetFormatedSize($file) {
 	$file = filesize($file);
-	
 	if ($file > 1000000000) $file = round($file/1073741824, 2)."&nbsp;GB";
 	else if ($file > 1000000) $file = round($file/1048574, 2)."&nbsp;MB";
 	else if ($file > 1000) $file = round($file/1024, 2)."&nbsp;KB";
 	else $file = $file."&nbsp;B";	
-	
 	return $file;
 }
 
@@ -347,54 +339,16 @@ function GetFormatedSize($file) {
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	<!--
-	.panel {
-		margin: 10px 0 5px 0;
-	}
-	
-	.panel-heading {
-		padding: 5px 10px;
-	}
-	
-	.panel-heading h1 {
-		text-align: center;
-		margin: 20px 0;
-		word-wrap: break-word;
-	}
-	
-	.panel-heading .breadcrumb {
-		margin: 0;
-		padding: 0;
-	}
-	
-	table.table th {
-		text-align: center;
-	}
-	
-	table.table tr td:last-child {
-		text-align: right;
-	}
-	
-	table.table tr:last-child.danger td{
-		color: #FF0000;
-	}
-	
-	table.table tr td img {
-		vertical-align: text-top;
-	}
-	
-	table.table tr td a {
-		width: 100%;
-		height: 100%;
-		margin: -5px;
-		padding: 5px;
-		display: block;
-		word-break: break-all;
-	}
-	
-	.footer {
-		margin-bottom: 10px;
-		text-align: center;
-	}
+	.panel { margin: 10px 0 5px 0; }
+	.panel-heading { padding: 5px 10px; }
+	.panel-heading h1 { text-align: center; margin: 20px 0; word-wrap: break-word; }
+	.panel-heading .breadcrumb { margin: 0; padding: 0; }
+	table.table th { text-align: center; }
+	table.table tr td:last-child { text-align: right; }
+	table.table tr.danger td{ color: #FF0000; }
+	table.table tr td img { vertical-align: text-top; }
+	table.table tr td a { width: 100%; height: 100%; margin: -5px; padding: 5px; display: block; word-break: break-all; }
+	.footer { margin-bottom: 10px; text-align: center; }
 	-->
 	</style>
 	
@@ -515,7 +469,7 @@ function GetFormatedSize($file) {
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<div class="col-lg-10 col-lg-offset-1 col-md-12 col-xm-12 col-xs-12 footer">
