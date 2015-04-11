@@ -388,6 +388,7 @@ function GetFormatedSize($file) {
 		margin: -5px;
 		padding: 5px;
 		display: block;
+		word-break: break-all;
 	}
 	
 	.footer {
