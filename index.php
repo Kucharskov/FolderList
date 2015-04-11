@@ -221,7 +221,7 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 	switch(strtolower($_GET["img"])) {
 		default: echo base64_decode($FL_IMAGES["unknown"]); break;
 		case "pdf": echo base64_decode($FL_IMAGES["adobe"]); break;
-		case "7z": case "cab": case "gzip": case "rar": case "tar": case "tgz": case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
+		case "7z": case "cab": case "gz": case "gzip": case "rar": case "tar": case "tgz": case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
 		case "aac": case "ac3": case "m4a": case "mid": case "midi": case "mp3": case "ogg": case "wav": case "wave": echo base64_decode($FL_IMAGES["audio"]); break;
 		case "css": case "html": case "php": case "xhtml": case "xml": echo base64_decode($FL_IMAGES["code"]); break;
 		case "ods": case "xls": case "xlsx": echo base64_decode($FL_IMAGES["excel"]); break;
