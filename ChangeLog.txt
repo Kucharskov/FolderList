@@ -3,7 +3,9 @@ FolderList v2.2.1
      * Fixed no world-break with loooong filenames
      * Nothing important fix
      * Updated binaries
+     * Added title, subtitle and description (for SEO)
      * Added icons to many new file formats (eg. ogg, tga, odt)
+     * Removed comments in code
      * [GitHub][Cysioland] Removed redundant directives in switch statement
 
 FolderList v2.2
