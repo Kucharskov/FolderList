@@ -338,7 +338,7 @@ function GetFormatedSize($file) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
-	<?php if($FL_CONFIG["SiteDesc"]) ?><meta name="description" content="<?php echo $FL_CONFIG["SiteDesc"]; ?>">
+	<?php if($FL_CONFIG["SiteDesc"]) { ?><meta name="description" content="<?php echo $FL_CONFIG["SiteDesc"]; ?>"><?php } ?>
 		
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
@@ -371,8 +371,8 @@ function GetFormatedSize($file) {
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h1>
-						<?php echo $FL_CONFIG["SiteTitle"]; ?><br>
-						<?php if($FL_CONFIG["SiteSubTitle"]) ?><small><?php echo $FL_CONFIG["SiteSubTitle"]; ?></small>
+						<?php echo $FL_CONFIG["SiteTitle"]; ?>
+						<?php if($FL_CONFIG["SiteSubTitle"]) { ?><br><small><?php echo $FL_CONFIG["SiteSubTitle"]; ?></small><?php } ?>
 					</h1>
 					
 					<ol class="breadcrumb">
