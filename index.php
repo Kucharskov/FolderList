@@ -369,13 +369,10 @@ function GetFormatedSize($file) {
 					<h1><?php echo $FL_CONFIG["SiteName"]; ?></h1>
 					<ol class="breadcrumb">
 						<?php
-						//Displaying localization of user
 						if($FL_CONFIG["ShowDir"]) {
-							//If user is in main folder, show only main string
 							if(!$_GET["dir"]) {
 								echo "<li class=\"active\">".ShowText("MainFolder")."</li>\n";
 							} else {
-								//Else show directores with links
 								echo "<li><a href=\"?dir=\">".ShowText("MainFolder")."</a></li>\n";
 								$FL_ManyFolders = count($FL_FolderLocs)-2;
 
@@ -392,7 +389,6 @@ function GetFormatedSize($file) {
 					</ol>
 				</div>
 				<?php
-				//If password exist and user are not logged
 				if($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] !== $FL_CONFIG["Password"]) {
 					if(isset($_POST["password"]) && $_POST["password"] !== $FL_CONFIG["Password"]) $FL_LoginError = 1;
 				?>
@@ -421,7 +417,6 @@ function GetFormatedSize($file) {
 				<?php
 				}
 
-				//If password does not exist or if usser are logged
 				if($FL_CONFIG["Password"] === "" || ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"])) {
 				?>
 				<table class="table table-condensed table-striped table-hover">
@@ -434,18 +429,14 @@ function GetFormatedSize($file) {
 					</thead>
 					<tbody>
 						<?php
-						//If user is in no avalibe folder
 						if(AboveDir($FL_FolderCheck, __DIR__)) {
 							DrawTableRow(0, "back", "<a href=\"?dir=\">..</a>", "");
 							DrawTableRow(1, "warning", ShowText("NoAccess"), "");
 						} else {
-							//If user is in folder, show back arrow
 							if($_GET["dir"]) DrawTableRow(0, "back", "<a href=\"?dir={$FL_FolderUp}\">..</a>", "");
-							//If folder don't contain any files, show an error
 							if(count($FL_Folders) == 0 && count($FL_Files) == 0) {
 								DrawTableRow(1, "warning", ShowText("NoFiles"), "");
 							} else {
-								//Main loops to show folders and files
 								if(count($FL_Folders) != 0) {
 									foreach($FL_Folders as $FL_Folder) {
 										$FL_FolderName = str_replace("{$_GET["dir"]}/", "", $FL_Folder);
@@ -474,7 +465,6 @@ function GetFormatedSize($file) {
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<div class="col-lg-10 col-lg-offset-1 col-md-12 col-xm-12 col-xs-12 footer">
 				<?php
-				//End of page load time
 				if($FL_CONFIG["ShowLoadTime"] == 1) {
 					$FL_Time["End"] = microtime(true);
 					$FL_Time = round(($FL_Time["End"]-$FL_Time["Start"]), 2);
@@ -485,7 +475,6 @@ function GetFormatedSize($file) {
 				?>
 				<a target="_blank" href="http://folderlist.kucharskov.pl">FolderList</a>
 				<?php
-				//If password exist and user are logged, show "logout"
 				if ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"]) {
 					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">".ShowText("logout")."</a>";
 					else echo " | <a href=\"?logout=1\">".ShowText("logout")."</a>";
