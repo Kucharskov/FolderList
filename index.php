@@ -20,8 +20,8 @@
  *	Configuration of FolderList
  *	Read comments and edit what you want
  */
-$FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site
-$FL_CONFIG["SiteTitle"] = "Page powered by FolderList";													//Title of your site
+$FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site (<title> tag)
+$FL_CONFIG["SiteTitle"] = "Page powered by FolderList";													//Title of your site (top title on page)
 $FL_CONFIG["SiteSubTitle"] = "List any file of the folder";												//SubTitle of your site
 $FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
 $FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
