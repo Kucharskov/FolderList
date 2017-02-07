@@ -21,6 +21,8 @@
  *	Read comments and edit what you want
  */
 $FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site
+$FL_CONFIG["SiteTitle"] = "Page powered by FolderList";													//Title of your site
+$FL_CONFIG["SiteSubTitle"] = "List any file of the folder";												//SubTitle of your site
 $FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
 $FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
 $FL_CONFIG["Hidden"] = array("index.php", ".htaccess", ".htpasswd");									//Files and folders what you won't to show
@@ -366,7 +368,11 @@ function GetFormatedSize($file) {
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1><?php echo $FL_CONFIG["SiteName"]; ?></h1>
+					<h1>
+						<?php echo $FL_CONFIG["SiteTitle"]; ?><br>
+						<?php if($FL_CONFIG["SiteSubTitle"]) ?><small><?php echo $FL_CONFIG["SiteSubTitle"]; ?></small>
+					</h1>
+					
 					<ol class="breadcrumb">
 						<?php
 						if($FL_CONFIG["ShowDir"]) {
