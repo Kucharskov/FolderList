@@ -23,6 +23,7 @@
 $FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site (<title> tag)
 $FL_CONFIG["SiteTitle"] = "Page powered by FolderList";													//Title of your site (top title on page)
 $FL_CONFIG["SiteSubTitle"] = "List any file of the folder";												//SubTitle of your site
+$FL_CONFIG["SiteDesc"] = "FolderList is a simple PHP script to interact with folder content.";			//Descriptiom of your site (meta tag)
 $FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
 $FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
 $FL_CONFIG["Hidden"] = array("index.php", ".htaccess", ".htpasswd");									//Files and folders what you won't to show
@@ -337,7 +338,8 @@ function GetFormatedSize($file) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
-
+	<?php if($FL_CONFIG["SiteDesc"]) ?><meta name="description" content="<?php echo $FL_CONFIG["SiteDesc"]; ?>">
+		
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	<!--
