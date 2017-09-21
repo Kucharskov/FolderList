@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.2.1 (http://folderlist.kucharskov.pl)
+ *	FolderList v2.2.1 (https://github.com/Kucharskov/FolderList)
  *	with love by M. Kucharskov (http://kucharskov.pl)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
@@ -481,7 +481,7 @@ function GetFormatedSize($file) {
 					echo "{$FL_Time} | ";
 				}
 				?>
-				<a target="_blank" href="http://folderlist.kucharskov.pl">FolderList</a>
+				<a target="_blank" href="https://github.com/Kucharskov/FolderList">FolderList</a>
 				<?php
 				if ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"]) {
 					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">".ShowText("logout")."</a>";
