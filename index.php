@@ -384,12 +384,14 @@ function GetFormatedSize($file) {
 								echo "<li><a href=\"?dir=\">".ShowText("MainFolder")."</a></li>\n";
 								$FL_ManyFolders = count($FL_FolderLocs)-2;
 
-								for($FL_LocNum = 0; $FL_LocNum <= $FL_ManyFolders; $FL_LocNum++) {
-									if($FL_LocNum == 0) $FL_FolderBack = "{$FL_FolderLocs[$FL_LocNum]}";
-									else $FL_FolderBack .= "/{$FL_FolderLocs[$FL_LocNum]}";
-								
-									if($FL_LocNum == $FL_ManyFolders) echo "<li class=\"active\">{$FL_FolderLocs[$FL_LocNum]}</li>\n";
-									else echo "<li><a href=\"?dir={$FL_FolderBack}\">{$FL_FolderLocs[$FL_LocNum]}</a></li>\n";					
+								if(is_dir($FL_FolderCheck)) {
+									for($FL_LocNum = 0; $FL_LocNum <= $FL_ManyFolders; $FL_LocNum++) {
+										if($FL_LocNum == 0) $FL_FolderBack = "{$FL_FolderLocs[$FL_LocNum]}";
+										else $FL_FolderBack .= "/{$FL_FolderLocs[$FL_LocNum]}";
+									
+										if($FL_LocNum == $FL_ManyFolders) echo "<li class=\"active\">{$FL_FolderLocs[$FL_LocNum]}</li>\n";
+										else echo "<li><a href=\"?dir={$FL_FolderBack}\">{$FL_FolderLocs[$FL_LocNum]}</a></li>\n";					
+									}
 								}
 							}
 						}
