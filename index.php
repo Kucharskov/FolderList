@@ -245,8 +245,7 @@ if(isset($_GET["img"]) && !isset($_GET["dir"])) {
 if($FL_CONFIG["ShowLoadTime"] == 1) $FL_Time["Start"] = microtime(true);
 
 //Getting script filename
-$FL_Name = pathinfo(__FILE__);
-$FL_Name = $FL_Name["basename"];
+$FL_Name = pathinfo(__FILE__)["basename"];
 
 //Password protection session
 if($FL_CONFIG["Password"] !== "") {
