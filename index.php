@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.2.1 (https://github.com/Kucharskov/FolderList)
+ *	FolderList v2.2.2 (https://github.com/Kucharskov/FolderList)
  *	with love by M. Kucharskov (http://kucharskov.pl)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
