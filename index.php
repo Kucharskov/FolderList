@@ -42,7 +42,7 @@ $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with fol
 $FL_CONFIG["showtime"] = true;
 
 //Directory with files
-//$FL_CONFIG["contentdir"] = "/";
+$FL_CONFIG["contentdir"] = "";
 
 /******************************/
 /* Translations of FolderList */
@@ -266,6 +266,29 @@ if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 //Start of page load time
 if($FL_CONFIG["showtime"]) $FL_TIME["start"] = microtime(true);
 
+//Setup variables
+$FL_FOLDER = dirname(__FILE__);
+if($FL_CONFIG["contentdir"] !== "") {
+	$FL_FOLDER .= "/".$FL_CONFIG["contentdir"];
+}
+if($_GET["dir"]) {
+	$FL_FOLDER .= "/".$_GET["dir"];
+}
+$FL_DIRS = [];
+$FL_FILES = [];
+
+//Check if user want go too far
+function AboveDir($dir) {
+	$dir_top = __DIR__;	
+	if($dir === $dir_top) return false;
+	$dir = realpath($dir);
+	$dir_top = realpath($dir_top);	
+	$dir = count(explode("/", $dir));
+	$dir_top = count(explode("/", $dir_top));
+	if($dir <= $dir_top) return true;
+	else return false;
+}
+
 //Return string with multilang text security
 function showText($string) {
 	global $FL_CONFIG;
@@ -329,22 +352,70 @@ function showText($string) {
 			</thead>
 			<tbody>
 
-<!--
-<tr class="table-danger">
-<td><img src="http://folderlist.kucharskov.pl/?img=warning"></td>
-<td colspan="2">You dont have access to selected folder!</td>
-</tr>-->
+			<?php
+			
+			if(!is_dir($FL_FOLDER) || AboveDir($FL_FOLDER)) {
+				echo "<tr class='table-danger'>";
+				echo "<td><img src='?image=warning'></td>";
+				echo "<td colspan='2'>".showText("noaccess")."</td>";
+				echo "</tr>";
+			} else {
+				//Getting data from directory
+				foreach(new DirectoryIterator($FL_FOLDER) as $element) {
+					if($element->isDot()) continue;
+					if($element->isFile()) {
+						array_push($FL_FILES, [
+							"name" => $element->getFilename(),
+							"size" => $element->getSize(),
+							"ext" => $element->getExtension()
+						]);
+					}
+					if($element->isDir()) {
+						array_push($FL_DIRS, [
+							"name" => $element->getFilename()
+						]);
+					}
+				}
+				usort($FL_DIRS, function($a, $b) {
+					return strtolower($a["name"]) <=> strtolower($b["name"]);
+				});
+				usort($FL_FILES, function($a, $b) {
+					return strtolower($a["name"]) <=> strtolower($b["name"]);
+				});
+				
+				if(count($FL_FILES) === 0 && count($FL_DIRS) === 0) {
+					echo "<tr class='table-danger'>";
+					echo "<td><img src='?image=warning'></td>";
+					echo "<td colspan='2'>".showText("nofiles")."</td>";
+					echo "</tr>";
+				}
+			}
+			?>
+			
+			<!--
+			<tr class="table-danger">
+			<td><img src="http://folderlist.kucharskov.pl/?img=warning"></td>
+			<td colspan="2">You dont have access to selected folder!</td>
+			</tr>-->
 
-<tr>
-<td><img src="?image=folder"></td>
-<td colspan="2"><a href="#">Some folder</a></td>
-</tr>
+			<?php
+			foreach($FL_DIRS as $dir) {
+				echo "<tr>";
+				echo "<td><img src='?image=folder'></td>";
+				echo "<td colspan='2'><a href='#'>{$dir["name"]}</a></td>";
+				echo "</tr>";
+			}
+			?>
 
-<tr>
-<td><img src="?image=none"></td>
-<td><a href="#">Unsupported type file</a></td>
-<td class="size">0&nbsp;B</td>
-</tr>
+			<?php
+			foreach($FL_FILES as $file) {
+				echo "<tr>";
+				echo "<td><img src='?image={$file["ext"]}'></td>";
+				echo "<td><a href='#'>{$file["name"]}</a></td>";
+				echo "<td class='size'>{$file["size"]}&nbsp;B</td>";
+				echo "</tr>";
+			}
+			?>
 
 			</tbody>
 		</table>
