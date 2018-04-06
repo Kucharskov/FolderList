@@ -38,8 +38,8 @@ $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with fol
 //Displaing breadcrumb with folders tree
 //$FL_CONFIG["showdir"] = 1;
 
-//Displaing page load time
-//$FL_CONFIG["showtime"] = 0;
+//Displaing page load time (true/false)
+$FL_CONFIG["showtime"] = true;
 
 //Directory with files
 //$FL_CONFIG["contentdir"] = "/";
@@ -263,6 +263,9 @@ if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 	die();
 }
 
+//Start of page load time
+if($FL_CONFIG["showtime"]) $FL_TIME["start"] = microtime(true);
+
 //Return string with multilang text security
 function showText($string) {
 	global $FL_CONFIG;
@@ -351,6 +354,13 @@ function showText($string) {
 </div>
 <div class="row justify-content-center">
 <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 text-center mb-3">
+	<?php
+	if($FL_CONFIG["showtime"]) {
+		$FL_TIME = round((microtime(true) - $FL_TIME["start"]), 2);
+		$FL_TIME = str_replace("[FL_TIME]", $FL_TIME, showText("loadtime"));
+		echo "{$FL_TIME} |";
+	}
+	?>
 	<a target="_blank" href="https://github.com/Kucharskov/FolderList">FolderList</a>
 </div>
 </div>
