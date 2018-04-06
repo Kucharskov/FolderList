@@ -89,10 +89,11 @@ $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with fol
 			</thead>
 			<tbody>
 
+<!--
 <tr class="table-danger">
 <td><img src="http://folderlist.kucharskov.pl/?img=warning"></td>
 <td colspan="2">You dont have access to selected folder!</td>
-</tr>
+</tr>-->
 
 <tr>
 <td><img src="https://folderlist.kucharskov.pl/?img=folder"></td>
