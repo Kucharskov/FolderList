@@ -16,14 +16,37 @@
  *
  ***************************************************************************/
  
+  
+/*******************************/
+/* Configuration of FolderList */
+/*******************************/
+
+//Page and script language
+$FL_CONFIG["lang"] = "en";
+
+//Content of H1 at page
+$FL_CONFIG["heading"] = "Page powered by FolderList";
+
+//Content of sub H1 at page (to hide leave empty)
+$FL_CONFIG["subheading"] = "List any file of the folder";
+
+//SEO: Title tag
+$FL_CONFIG["sitename"] = "Page powered by FolderList";
+
+//SEO: Meta "description" tag
+$FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="<?php echo $FL_CONFIG["lang"]; ?>">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<meta name="description" content="<?php echo $FL_CONFIG["sitedesc"]; ?>">
+	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
+	<title><?php echo $FL_CONFIG["sitename"]; ?></title>
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style type="text/css">
 	<!--
@@ -35,8 +58,6 @@
 	.table tr.table-danger td { color: #F00; }
 	-->
 	</style>
-
-	<title>Page powered by FolderList</title>
 </head>
 <body>
 
@@ -45,8 +66,10 @@
 <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 mt-3">
 <div class="card">
 	<div class="card-header text-center">
-		<h1>Page powered by FolderList</h1>
-		<p class="h4 text-muted">List any file of the folder</p>
+		<h1><?php echo $FL_CONFIG["heading"]; ?></h1>
+		<?php if($FL_CONFIG["subheading"] !== "") { ?>
+		<p class="h4 text-muted"><?php echo $FL_CONFIG["subheading"]; ?></p>
+		<?php } ?>
 		
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb p-0 m-0 mt-3">
