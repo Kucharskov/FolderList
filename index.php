@@ -296,6 +296,16 @@ function showText($string) {
 	else
 		return $FL_TRANSLATION[$FL_CONFIG["lang"]][$string];
 }
+
+//Return formated file size
+function getFormatedSize($size) {
+	if ($size > 1000000000) $size = round($size/1073741824, 0)."&nbsp;GB";
+	else if ($size > 1000000) $size = round($size/1048574, 0)."&nbsp;MB";
+	else if ($size > 1000) $size = round($size/1024, 0)."&nbsp;KB";
+	else $size = $size."&nbsp;B";	
+	return $size;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -433,7 +443,7 @@ function showText($string) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
 				echo "<td><a href='#'>{$file["name"]}</a></td>";
-				echo "<td class='size'>{$file["size"]}&nbsp;B</td>";
+				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
 			}
 			?>
