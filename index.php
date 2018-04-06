@@ -41,9 +41,6 @@ $FL_CONFIG["showdir"] = false;
 //Displaing page load time (true/false)
 $FL_CONFIG["showtime"] = false;
 
-//Directory with files
-$FL_CONFIG["contentdir"] = "";
-
 /******************************/
 /* Translations of FolderList */
 /******************************/
@@ -268,7 +265,6 @@ if($FL_CONFIG["showtime"]) $FL_TIME["start"] = microtime(true);
 
 //Setup variables
 $FL_FOLDER = dirname(__FILE__);
-if($FL_CONFIG["contentdir"] !== "") $FL_FOLDER .= "/".$FL_CONFIG["contentdir"];
 if($_GET["dir"]) $FL_FOLDER .= "/".$_GET["dir"];
 $FL_FOLDER = rtrim($FL_FOLDER, "/");
 $FL_TRACE = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
@@ -434,17 +430,19 @@ function getFormatedSize($size) {
 				}
 			}
 
+			if($_GET["dir"]) $FL_TRACE .= "/";
+			
 			foreach($FL_DIRS as $dir) {
 				echo "<tr>";
 				echo "<td><img src='?image=folder'></td>";
-				echo "<td colspan='2'><a href='?dir={$FL_TRACE}/{$dir["name"]}'>{$dir["name"]}</a></td>";
+				echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'>{$dir["name"]}</a></td>";
 				echo "</tr>";
 			}
 
 			foreach($FL_FILES as $file) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
-				echo "<td><a href='{$FL_TRACE}/{$file["name"]}'>{$file["name"]}</a></td>";
+				echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["name"]}</a></td>";
 				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
 			}
