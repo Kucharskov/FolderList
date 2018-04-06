@@ -35,11 +35,11 @@ $FL_CONFIG["sitename"] = "Page powered by FolderList";
 //SEO: Meta "description" tag
 $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
 
-//Displaing breadcrumb with folders tree
-//$FL_CONFIG["showdir"] = 1;
+//Displaing breadcrumb with folders tree (true/false)
+$FL_CONFIG["showdir"] = false;
 
 //Displaing page load time (true/false)
-$FL_CONFIG["showtime"] = true;
+$FL_CONFIG["showtime"] = false;
 
 //Directory with files
 $FL_CONFIG["contentdir"] = "";
@@ -268,12 +268,9 @@ if($FL_CONFIG["showtime"]) $FL_TIME["start"] = microtime(true);
 
 //Setup variables
 $FL_FOLDER = dirname(__FILE__);
-if($FL_CONFIG["contentdir"] !== "") {
-	$FL_FOLDER .= "/".$FL_CONFIG["contentdir"];
-}
-if($_GET["dir"]) {
-	$FL_FOLDER .= "/".$_GET["dir"];
-}
+if($FL_CONFIG["contentdir"] !== "") $FL_FOLDER .= "/".$FL_CONFIG["contentdir"];
+if($_GET["dir"]) $FL_FOLDER .= "/".$_GET["dir"];
+$FL_FOLDER = rtrim($FL_FOLDER, "/");
 $FL_DIRS = [];
 $FL_FILES = [];
 
@@ -334,12 +331,36 @@ function showText($string) {
 		<p class="h4 text-muted"><?php echo $FL_CONFIG["subheading"]; ?></p>
 		<?php } ?>
 		
-		<!--<nav aria-label="breadcrumb">
+		<?php
+		if($FL_CONFIG["showdir"]) {
+		?>
+		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb p-0 m-0 mt-3">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Data</li>
+			<?php
+				if(!$_GET["dir"]) {
+					echo "<li class='breadcrumb-item active'>".ShowText("root")."</li>";
+				} else {
+					echo "<li class='breadcrumb-item'><a href='?dir='>".ShowText("root")."</a></li>";
+					
+					if(is_dir($FL_FOLDER)) {
+						$dirList = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
+						$dirList = explode("/", $dirList);
+						$count = count($dirList);
+						for($i = 0; $i < $count-1; $i++) {
+							$dir = "";
+							for($j = 0; $j <= $i; $j++)	{
+								$dir .= $dirList[$j];
+								if($i != $j) $dir .= "/";
+							}
+							echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$dirList[$i]."</a></li>";
+						}
+						echo "<li class='breadcrumb-item active'>".$dirList[$count-1]."</a></li>";
+					}
+				}
+			?>
 			</ol>
-		</nav>-->
+		</nav>
+		<?php } ?>
 	</div>
 	<div class="card-body p-0">
 		<table class="table table-striped table-hover table-sm table-responsive m-0">
