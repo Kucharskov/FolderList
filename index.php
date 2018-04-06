@@ -275,7 +275,7 @@ $FL_DIRS = [];
 $FL_FILES = [];
 
 //Check if user want go too far
-function AboveDir($dir) {
+function aboveDir($dir) {
 	$dir_top = __DIR__;	
 	if($dir === $dir_top) return false;
 	$dir = realpath($dir);
@@ -347,26 +347,26 @@ function getFormatedSize($size) {
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb p-0 m-0 mt-3">
 			<?php
-				if(!$_GET["dir"]) {
-					echo "<li class='breadcrumb-item active'>".ShowText("root")."</li>";
-				} else {
-					echo "<li class='breadcrumb-item'><a href='?dir='>".ShowText("root")."</a></li>";
-					
-					if(is_dir($FL_FOLDER)) {
-						$dirList = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
-						$dirList = explode("/", $dirList);
-						$count = count($dirList);
-						for($i = 0; $i < $count-1; $i++) {
-							$dir = "";
-							for($j = 0; $j <= $i; $j++)	{
-								$dir .= $dirList[$j];
-								if($i != $j) $dir .= "/";
-							}
-							echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$dirList[$i]."</a></li>";
+			if(!$_GET["dir"]) {
+				echo "<li class='breadcrumb-item active'>".showText("root")."</li>";
+			} else {
+				echo "<li class='breadcrumb-item'><a href='?dir='>".showText("root")."</a></li>";
+				
+				if(is_dir($FL_FOLDER)) {
+					$dirList = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
+					$dirList = explode("/", $dirList);
+					$count = count($dirList);
+					for($i = 0; $i < $count-1; $i++) {
+						$dir = "";
+						for($j = 0; $j <= $i; $j++)	{
+							$dir .= $dirList[$j];
+							if($i != $j) $dir .= "/";
 						}
-						echo "<li class='breadcrumb-item active'>".$dirList[$count-1]."</a></li>";
+						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$dirList[$i]."</a></li>";
 					}
+					echo "<li class='breadcrumb-item active'>".$dirList[$count-1]."</a></li>";
 				}
+			}
 			?>
 			</ol>
 		</nav>
@@ -384,8 +384,7 @@ function getFormatedSize($size) {
 			<tbody>
 
 			<?php
-			
-			if(!is_dir($FL_FOLDER) || AboveDir($FL_FOLDER)) {
+			if(!is_dir($FL_FOLDER) || aboveDir($FL_FOLDER)) {
 				echo "<tr class='table-danger'>";
 				echo "<td><img src='?image=warning'></td>";
 				echo "<td colspan='2'>".showText("noaccess")."</td>";
