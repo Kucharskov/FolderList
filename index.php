@@ -36,7 +36,7 @@ $FL_CONFIG["sitename"] = "Page powered by FolderList";
 $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
 
 //Displaing breadcrumb with folders tree (true/false)
-$FL_CONFIG["showdir"] = false;
+$FL_CONFIG["showdir"] = true;
 
 //Displaing page load time (true/false)
 $FL_CONFIG["showtime"] = false;
