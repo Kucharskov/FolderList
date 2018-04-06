@@ -353,11 +353,7 @@ function getFormatedSize($size) {
 				if(is_dir($FL_FOLDER)) {
 					$count = count($FL_TRACELIST);
 					for($i = 0; $i < $count-1; $i++) {
-						$dir = "";
-						for($j = 0; $j <= $i; $j++)	{
-							$dir .= $FL_TRACELIST[$j];
-							if($i != $j) $dir .= "/";
-						}
+						$dir = implode("/", array_slice($FL_TRACELIST, 0, $i+1));
 						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$FL_TRACELIST[$i]."</a></li>";
 					}
 					echo "<li class='breadcrumb-item active'>".$FL_TRACELIST[$count-1]."</a></li>";
