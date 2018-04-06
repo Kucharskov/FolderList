@@ -15,7 +15,6 @@
  *	and distributed under the Creative Commons Attribution 3.0 License.
  *
  ***************************************************************************/
- 
   
 /*******************************/
 /* Configuration of FolderList */
@@ -36,6 +35,49 @@ $FL_CONFIG["sitename"] = "Page powered by FolderList";
 //SEO: Meta "description" tag
 $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
 
+/******************************/
+/* Translations of FolderList */
+/******************************/
+
+//English by Mezurashii
+$FL_TRANSLATION["en"] = [
+	"filename" => "Filename",
+	"filesize" => "Size",
+	"root" => "Home",
+	"loadtime" => "Loaded in [FL_TIME] ms",
+	"nofiles" => "No files in selected folder!",
+	"noaccess" => "You dont have access to selected folder!"
+];
+
+//Polish by M. Kucharskov
+$FL_TRANSLATION["pl"] = [
+	"filename" => "Nazwa",
+	"filesize" => "Rozmiar",
+	"root" => "Folder główny",
+	"loadtime" => "Załadowano w [FL_TIME] ms",
+	"nofiles" => "Brak plików w wybranym folderze!",
+	"noaccess" => "Nie masz dostępu do wybranego folderu!"
+];
+
+//Russian by NovemberGirl
+$FL_TRANSLATION["ru"] = [
+	"filename" => "Название",
+	"filesize" => "Размер",
+	"root" => "Корневая папка",
+	"loadtime" => "Загружено в [FL_TIME] мс",
+	"nofiles" => "Нет файлов в избранном фолдере!",
+	"noaccess" => "Нет доступа к избранному фолдеру!"
+];
+
+/***************************/
+/* Main code of FolderList */
+/* YOU'RE EDITING THIS AT  */
+/*     YOUR OWN RISK       */
+/***************************/
+
+//Turning off displaying errors
+ini_set("display_errors", 0);
+error_reporting(E_ALL & ~E_NOTICE);
 ?>
 
 <!DOCTYPE html>
