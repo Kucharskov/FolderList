@@ -264,8 +264,8 @@ if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 	die();
 }
 
-//Start of page load time
-if($FL_CONFIG["showtime"]) $FL_TIME["start"] = microtime(true);
+//Start of page loading time
+if($FL_CONFIG["showtime"]) $FL_TIME = microtime(true);
 
 //Setup variables
 $FL_FOLDER = dirname(__FILE__);
@@ -352,8 +352,10 @@ function getFormatedSize($size) {
 			if(!$_GET["dir"]) {
 				echo "<li class='breadcrumb-item active'>".showText("root")."</li>";
 			} else {
+				//Displaying first element
 				echo "<li class='breadcrumb-item'><a href='?dir='>".showText("root")."</a></li>";
 				
+				//Generating tracelist folders
 				if(is_dir($FL_FOLDER)) {
 					$count = count($FL_TRACELIST);
 					for($i = 0; $i < $count-1; $i++) {
@@ -380,6 +382,7 @@ function getFormatedSize($size) {
 			<tbody>
 
 			<?php
+			//Checking folder
 			if(!is_dir($FL_FOLDER) || aboveDir($FL_FOLDER)) {
 				echo "<tr>";
 				echo "<td><img src='?image=back'></td>";
@@ -391,6 +394,7 @@ function getFormatedSize($size) {
 				echo "<td colspan='2'>".showText("noaccess")."</td>";
 				echo "</tr>";
 			} else {
+				//Generating "back" row
 				if($_GET["dir"]) {
 					$back = substr(str_replace(end($FL_TRACELIST), "", $FL_TRACE), 0, -1);
 					echo "<tr>";
@@ -401,11 +405,13 @@ function getFormatedSize($size) {
 				
 				//Getting data from directory
 				foreach(new DirectoryIterator($FL_FOLDER) as $element) {
+					//Skip dots
 					if($element->isDot()) continue;
 					if($element->isFile()) {
 						//Skip self file from listing
 						if(!$_GET["dir"] && $element->getFilename() === pathinfo(__FILE__)["basename"]) continue;
 						
+						//If file is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddenfiles"])) {
 							array_push($FL_FILES, [
 								"name" => $element->getFilename(),
@@ -415,6 +421,7 @@ function getFormatedSize($size) {
 						}
 					}
 					if($element->isDir()) {
+						//If dir is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddendirs"])) {
 							array_push($FL_DIRS, [
 								"name" => $element->getFilename()
@@ -422,6 +429,7 @@ function getFormatedSize($size) {
 						}
 					}
 				}
+				//Sorting elements
 				usort($FL_DIRS, function($a, $b) {
 					return strtolower($a["name"]) <=> strtolower($b["name"]);
 				});
@@ -429,6 +437,7 @@ function getFormatedSize($size) {
 					return strtolower($a["name"]) <=> strtolower($b["name"]);
 				});
 				
+				//Empty folder info
 				if(count($FL_FILES) === 0 && count($FL_DIRS) === 0) {
 					echo "<tr class='table-danger'>";
 					echo "<td><img src='?image=warning'></td>";
@@ -437,8 +446,10 @@ function getFormatedSize($size) {
 				}
 			}
 
+			//Fix for missing last "/"
 			if($_GET["dir"]) $FL_TRACE .= "/";
 			
+			//Displaying dirs
 			foreach($FL_DIRS as $dir) {
 				echo "<tr>";
 				echo "<td><img src='?image=folder'></td>";
@@ -446,6 +457,7 @@ function getFormatedSize($size) {
 				echo "</tr>";
 			}
 
+			//Displaying files
 			foreach($FL_FILES as $file) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
@@ -464,8 +476,9 @@ function getFormatedSize($size) {
 <div class="row justify-content-center">
 <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 text-center mb-3">
 	<?php
+	//End of page loading time measurement
 	if($FL_CONFIG["showtime"]) {
-		$FL_TIME = round((microtime(true) - $FL_TIME["start"]), 2);
+		$FL_TIME = round((microtime(true) - $FL_TIME), 2);
 		$FL_TIME = str_replace("[FL_TIME]", $FL_TIME, showText("loadtime"));
 		echo "{$FL_TIME} |";
 	}
