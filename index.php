@@ -271,6 +271,8 @@ $FL_FOLDER = dirname(__FILE__);
 if($FL_CONFIG["contentdir"] !== "") $FL_FOLDER .= "/".$FL_CONFIG["contentdir"];
 if($_GET["dir"]) $FL_FOLDER .= "/".$_GET["dir"];
 $FL_FOLDER = rtrim($FL_FOLDER, "/");
+$FL_TRACE = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
+$FL_TRACELIST = explode("/", $FL_TRACE);
 $FL_DIRS = [];
 $FL_FILES = [];
 
@@ -353,18 +355,16 @@ function getFormatedSize($size) {
 				echo "<li class='breadcrumb-item'><a href='?dir='>".showText("root")."</a></li>";
 				
 				if(is_dir($FL_FOLDER)) {
-					$dirList = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
-					$dirList = explode("/", $dirList);
-					$count = count($dirList);
+					$count = count($FL_TRACELIST);
 					for($i = 0; $i < $count-1; $i++) {
 						$dir = "";
 						for($j = 0; $j <= $i; $j++)	{
-							$dir .= $dirList[$j];
+							$dir .= $FL_TRACELIST[$j];
 							if($i != $j) $dir .= "/";
 						}
-						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$dirList[$i]."</a></li>";
+						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$FL_TRACELIST[$i]."</a></li>";
 					}
-					echo "<li class='breadcrumb-item active'>".$dirList[$count-1]."</a></li>";
+					echo "<li class='breadcrumb-item active'>".$FL_TRACELIST[$count-1]."</a></li>";
 				}
 			}
 			?>
@@ -385,11 +385,24 @@ function getFormatedSize($size) {
 
 			<?php
 			if(!is_dir($FL_FOLDER) || aboveDir($FL_FOLDER)) {
+				echo "<tr>";
+				echo "<td><img src='?image=back'></td>";
+				echo "<td colspan='2'><a href='?dir='>..</a></td>";
+				echo "</tr>";
+					
 				echo "<tr class='table-danger'>";
 				echo "<td><img src='?image=warning'></td>";
 				echo "<td colspan='2'>".showText("noaccess")."</td>";
 				echo "</tr>";
 			} else {
+				if($_GET["dir"]) {
+					$back = substr(str_replace(end($FL_TRACELIST), "", $FL_TRACE), 0, -1);
+					echo "<tr>";
+					echo "<td><img src='?image=back'></td>";
+					echo "<td colspan='2'><a href='?dir={$back}'>..</a></td>";
+					echo "</tr>";
+				}
+				
 				//Getting data from directory
 				foreach(new DirectoryIterator($FL_FOLDER) as $element) {
 					if($element->isDot()) continue;
@@ -420,28 +433,18 @@ function getFormatedSize($size) {
 					echo "</tr>";
 				}
 			}
-			?>
-			
-			<!--
-			<tr class="table-danger">
-			<td><img src="http://folderlist.kucharskov.pl/?img=warning"></td>
-			<td colspan="2">You dont have access to selected folder!</td>
-			</tr>-->
 
-			<?php
 			foreach($FL_DIRS as $dir) {
 				echo "<tr>";
 				echo "<td><img src='?image=folder'></td>";
-				echo "<td colspan='2'><a href='#'>{$dir["name"]}</a></td>";
+				echo "<td colspan='2'><a href='?dir={$FL_TRACE}/{$dir["name"]}'>{$dir["name"]}</a></td>";
 				echo "</tr>";
 			}
-			?>
 
-			<?php
 			foreach($FL_FILES as $file) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
-				echo "<td><a href='#'>{$file["name"]}</a></td>";
+				echo "<td><a href='{$FL_TRACE}/{$file["name"]}'>{$file["name"]}</a></td>";
 				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
 			}
