@@ -35,6 +35,15 @@ $FL_CONFIG["sitename"] = "Page powered by FolderList";
 //SEO: Meta "description" tag
 $FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
 
+//Displaing breadcrumb with folders tree
+//$FL_CONFIG["showdir"] = 1;
+
+//Displaing page load time
+//$FL_CONFIG["showtime"] = 0;
+
+//Directory with files
+//$FL_CONFIG["contentdir"] = "/";
+
 /******************************/
 /* Translations of FolderList */
 /******************************/
