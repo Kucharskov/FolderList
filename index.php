@@ -41,6 +41,10 @@ $FL_CONFIG["showdir"] = true;
 //Displaing page load time (true/false)
 $FL_CONFIG["showtime"] = false;
 
+//Hidden dirs and files
+$FL_CONFIG["hiddendirs"] = [".well-known"];
+$FL_CONFIG["hiddenfiles"] = [".htaccess", ".htpasswd"];
+
 /******************************/
 /* Translations of FolderList */
 /******************************/
@@ -399,16 +403,23 @@ function getFormatedSize($size) {
 				foreach(new DirectoryIterator($FL_FOLDER) as $element) {
 					if($element->isDot()) continue;
 					if($element->isFile()) {
-						array_push($FL_FILES, [
-							"name" => $element->getFilename(),
-							"size" => $element->getSize(),
-							"ext" => $element->getExtension()
-						]);
+						//Skip self file from listing
+						if(!$_GET["dir"] && $element->getFilename() === pathinfo(__FILE__)["basename"]) continue;
+						
+						if(!in_array($element->getFilename(), $FL_CONFIG["hiddenfiles"])) {
+							array_push($FL_FILES, [
+								"name" => $element->getFilename(),
+								"size" => $element->getSize(),
+								"ext" => $element->getExtension()
+							]);
+						}
 					}
 					if($element->isDir()) {
-						array_push($FL_DIRS, [
-							"name" => $element->getFilename()
-						]);
+						if(!in_array($element->getFilename(), $FL_CONFIG["hiddendirs"])) {
+							array_push($FL_DIRS, [
+								"name" => $element->getFilename()
+							]);
+						}
 					}
 				}
 				usort($FL_DIRS, function($a, $b) {
