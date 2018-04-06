@@ -262,6 +262,17 @@ if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 	echo base64_decode($icon);
 	die();
 }
+
+//Return string with multilang text security
+function showText($string) {
+	global $FL_CONFIG;
+	global $FL_TRANSLATION;
+
+	if(!$FL_TRANSLATION[$FL_CONFIG["lang"]][$string])
+		return $FL_TRANSLATION["en"][$string];
+	else
+		return $FL_TRANSLATION[$FL_CONFIG["lang"]][$string];
+}
 ?>
 
 <!DOCTYPE html>
@@ -309,8 +320,8 @@ if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 			<thead class="text-center">
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col" class="col-10">Name</th>
-					<th scope="col">Size</th>
+					<th scope="col" class="col-10"><?php echo showText("filename"); ?></th>
+					<th scope="col"><?php echo showText("filesize"); ?></th>
 				</tr>
 			</thead>
 			<tbody>
