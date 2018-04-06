@@ -334,12 +334,12 @@ function showText($string) {
 		<p class="h4 text-muted"><?php echo $FL_CONFIG["subheading"]; ?></p>
 		<?php } ?>
 		
-		<nav aria-label="breadcrumb">
+		<!--<nav aria-label="breadcrumb">
 			<ol class="breadcrumb p-0 m-0 mt-3">
 				<li class="breadcrumb-item"><a href="#">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Data</li>
 			</ol>
-		</nav>		
+		</nav>-->
 	</div>
 	<div class="card-body p-0">
 		<table class="table table-striped table-hover table-sm table-responsive m-0">
