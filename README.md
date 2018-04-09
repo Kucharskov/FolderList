@@ -1,4 +1,4 @@
-﻿# FolderList [demo](http://folderlist.kucharskov.pl)
+﻿# FolderList [demo](http://folderlist.kucharskov.pl) v3.0
 
 ### Co to jest?
 FolderList to prosty skrypt napisany w języku PHP do wyświetlania zawartości folderu i interakcji z nią.
