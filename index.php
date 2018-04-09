@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  *
- *	FolderList v2.2.2 (https://github.com/Kucharskov/FolderList)
+ *	FolderList v3.0 (https://github.com/Kucharskov/FolderList)
  *	with love by M. Kucharskov (http://kucharskov.pl)
  *	Idea: Encode Explorer (http://encode-explorer.siineiolekala.net)
  *
@@ -15,86 +15,81 @@
  *	and distributed under the Creative Commons Attribution 3.0 License.
  *
  ***************************************************************************/
+  
+/*******************************/
+/* Configuration of FolderList */
+/*******************************/
 
-/*
- *	Configuration of FolderList
- *	Read comments and edit what you want
- */
-$FL_CONFIG["SiteName"] = "Page powered by FolderList";													//Name of your site (<title> tag)
-$FL_CONFIG["SiteTitle"] = "Page powered by FolderList";													//Title of your site (top title on page)
-$FL_CONFIG["SiteSubTitle"] = "List any file of the folder";												//SubTitle of your site
-$FL_CONFIG["SiteDesc"] = "FolderList is a simple PHP script to interact with folder content.";			//Descriptiom of your site (meta tag)
-$FL_CONFIG["ShowDir"] = 1;																				//Set to 1 to show where you are
-$FL_CONFIG["ShowLoadTime"] = 0;																			//Set to 1 to show page load time
-$FL_CONFIG["Hidden"] = array("index.php", ".htaccess", ".htpasswd");									//Files and folders what you won't to show
-$FL_CONFIG["Language"] = "en";																			//Script Language (en, pl, ru, de)
-$FL_CONFIG["Password"] = "";																			//Password to login, if you won't password leave empty
+//Page and script language
+$FL_CONFIG["lang"] = "en";
 
-/*
- *	Translations of FolderList
- */
-//English by P. Kowalczyk
-$FL_TRANSLATION["en"] = array(
-	"NoFiles" => "No files in selected folder!",
-	"NoAccess" => "You dont have access to selected folder!",
-	"FileName" => "Name",
-	"FileSize" => "Size",
-	"MainFolder" => "Home",
-	"LoadTime" => "Loaded in [FL_TIME] ms",
-	"login" => "Login",
-	"logout" => "Log out",
-	"LoginToSee" => "Enter password to see content",
-	"BadPass" => "Incorrect password"
-);
+//Content of H1 at page
+$FL_CONFIG["heading"] = "Page powered by FolderList";
+
+//Content of sub H1 at page (to hide leave empty)
+$FL_CONFIG["subheading"] = "List any file of the folder";
+
+//SEO: Title tag
+$FL_CONFIG["sitename"] = "Page powered by FolderList";
+
+//SEO: Meta "description" tag
+$FL_CONFIG["sitedesc"] = "FolderList is a simple PHP script to interact with folder content.";
+
+//Displaing breadcrumb with folders tree (true/false)
+$FL_CONFIG["showdir"] = true;
+
+//Displaing page load time (true/false)
+$FL_CONFIG["showtime"] = false;
+
+//Hidden dirs and files
+$FL_CONFIG["hiddendirs"] = [".well-known"];
+$FL_CONFIG["hiddenfiles"] = [".htaccess", ".htpasswd"];
+
+/******************************/
+/* Translations of FolderList */
+/******************************/
+
+//English by Mezurashii
+$FL_TRANSLATION["en"] = [
+	"filename" => "Filename",
+	"filesize" => "Size",
+	"root" => "Home",
+	"loadtime" => "Loaded in [FL_TIME] ms",
+	"nofiles" => "No files in selected folder!",
+	"noaccess" => "You dont have access to selected folder!"
+];
+
 //Polish by M. Kucharskov
-$FL_TRANSLATION["pl"] = array(
-	"NoFiles" => "Brak plików w wybranym folderze!",
-	"NoAccess" => "Nie masz dostępu do wybranego folderu!",
-	"FileName" => "Nazwa",
-	"FileSize" => "Rozmiar",
-	"MainFolder" => "Folder główny",
-	"LoadTime" => "Załadowano w [FL_TIME] ms",
-	"login" => "Zaloguj",
-	"logout" => "Wyloguj",
-	"LoginToSee" => "Wprowadź hasło aby zobaczyć zawartość",
-	"BadPass" => "Niepoprawne hasło"
-);
-//Russian by NovemberGirl
-$FL_TRANSLATION["ru"] = array(
-	"NoFiles" => "Нет файлов в избранном фолдере!",
-	"NoAccess" => "Нет доступа к избранному фолдеру!",
-	"FileName" => "Название",
-	"FileSize" => "Размер",
-	"MainFolder" => "Корневая папка",
-	"LoadTime" => "Загружено в [FL_TIME] мс",
-	"login" => "Войти",
-	"logout" => "Выйти",
-	"LoginToSee" => "Введи пароль чтобы посмотреть содержание",
-	"BadPass" => "Неправильный пароль"
-);
-//Deutsch by M. Kucharskov
-$FL_TRANSLATION["de"] = array(
-	"NoFiles" => "Es Fehlen in diesen Ordner Dateien!",
-	"NoAccess" => "Du hast kein Zugriff zu den ausgewählten Ordner!",
-	"FileName" => "Dateiname",
-	"FileSize" => "Größe",
-	"MainFolder" => "Hauptordner",
-	"LoadTime" => "Diese Seite wurde in [FL_TIME] ms geladen",
-	"login" => "Anmelden",
-	"logout" => "Ausloggen",
-	"LoginToSee" => "Geben sie das Passwort ein, um den Inhalt zu zeigen",
-	"BadPass" => "Falsches Passwort"
-);
+$FL_TRANSLATION["pl"] = [
+	"filename" => "Nazwa",
+	"filesize" => "Rozmiar",
+	"root" => "Folder główny",
+	"loadtime" => "Załadowano w [FL_TIME] ms",
+	"nofiles" => "Brak plików w wybranym folderze!",
+	"noaccess" => "Nie masz dostępu do wybranego folderu!"
+];
 
-/*
- *	Main code of FolderList
- *	DO NOT EDIT IF YOU DO NOT KNOW WHAT YOU DO!
- */
-//Turn off displaying errors
+//Russian by NovemberGirl
+$FL_TRANSLATION["ru"] = [
+	"filename" => "Название",
+	"filesize" => "Размер",
+	"root" => "Корневая папка",
+	"loadtime" => "Загружено в [FL_TIME] мс",
+	"nofiles" => "Нет файлов в избранном фолдере!",
+	"noaccess" => "Нет доступа к избранному фолдеру!"
+];
+
+/***************************/
+/* Main code of FolderList */
+/* YOU'RE EDITING THIS AT  */
+/*     YOUR OWN RISK       */
+/***************************/
+
+//Turning off displaying errors
 ini_set("display_errors", 0);
 error_reporting(E_ALL & ~E_NOTICE);
 
-//Icons codes in base64
+//Icons coded in BASE64
 $FL_IMAGES["warning"] = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1h
 Z2VSZWFkeXHJZTwAAAJPSURBVDjLpZPLS5RhFMYfv9QJlelTQZwRb2OKlKuINuHGLlBEBEOLxAu46oL0F0QQFdWizUCrWnjBaDHg
 ThCMoiKkhUONTqmjmDp2GZ0UnWbmfc/ztrC+GbM2dXbv4ZzfeQ7vefKMMfifyP89IbevNNCYdkN2kawkCZKfSPZTOGTf6Y/m1ufl
@@ -155,6 +150,15 @@ e3ZfQny7CE51WJDXqpjeEUHr45ki9rIqa4dmQiJfMLItGEs/FcQ2ucbRmdnSYy5vYWyLx/w3EaMfLmBa
 YmLtApzcrIAqmfrEgdZH1grY/a36w6Xz0DKD8ES25/niYS6+wWE8mWfByY8cXmYEJFYLkHUHtVqNQcltAvoLD3v7o/FUHsNvzlnw
 xfsCEukC/ho3yUHaBN5Buo17Ojtyl+DqrnvQgUtfcC0ZcAdkUeA+ye7eMru9AUGIJPe4zh509UP/AAfNypi8oj/mAAAAAElFTkSu
 QmCC";
+$FL_IMAGES["disc"] = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1h
+Z2VSZWFkeXHJZTwAAAIzSURBVDjLhZNbbtpQEIazgaygG4nUjXRH3QAySvvSKokEgeaBSBGFXJqAQkMxYCA03EJMzcWxCb6AAYP9
+d46BhqRURfqw5Zn5z5y5bAHYWufd++hbwkdkCYUYEBXCz2yv/dcDtwmOsL/yIkotHU11irY5g9QfIp5tgdmWPtsvBJbB0YOLCuaO
+C0kHjtIGvhQMfO9PMSYnh2A25sN8VyIrAY4ZNBvezyTvvUsNn66fIGgOXPpGD+jOwr4U4TwBetkhHLFvYy+loqounE74MfxnKupD
+eBn06M+k55ThukzAYbHe6TG630lBx8dLBbsXCooSUOsBqapJ15mgPwFkEtAplcEcMIjYoiYcE8gLoobPyUcSkOH/JiOS1XGYqDOH
+LiOcbMCkoDZlU30ChPYcgqgze54JqLfSiE6WsUvBH0jkpmEyY4d4s6RT6U0QoaKGMppHUbKYj/pHwH8ugzvtwXfaRfr+b4HiLwsh
+Xsf+zYDoo7AmkM8/DMCdd73gIKlXVRcs7dUVDhMNJBssgyGOSxai5RFyzecreEW8vh9DkIGWBTQMQgMqjxOUOhOkmjOEciPs02wE
+MiYSJLZeRK+NNrVGph7dDQC+C1yJQLw+x/HtFOG8hQBv4eCHiSBvkrD93Mb1QVKoXYICJCg4VnMRKc8QFsYIZhfBAd5AWrRfDtLr
+UZYMFznKIF6bI1JcnH4k0C7cWfgp25tHedMyZR90lLtTrwYZKgj79s9l+s86K8t336Z1/g2YLh6PHfCmogAAAABJRU5ErkJggg";
 $FL_IMAGES["excel"] = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1h
 Z2VSZWFkeXHJZTwAAAIpSURBVDjLjZNPSFRRFMZ/9707o0SOOshM0x/JFtUmisKBooVEEUThsgi3KS0CN0G2lagWEYkSUdsRWgSF
 G9sVFAW1EIwQqRZiiDOZY804b967954249hUpB98y/PjO5zzKREBQCm1E0gDPv9XHpgTEQeAiFCDHAmCoBhFkTXGyL8cBIGMjo7e
@@ -218,281 +222,274 @@ r1KxtDe4ZcNlHjJHO8xS4gwQ60f1Q+izK2GK77pvuLNqw1e46XKpwr2FeSV8RsbFaVpkueP+T/KqX8iO
 N6q3hY3KcCatgVbjs+WBHrJ6NuHK99VfuMAa6qSSW5Ka8iRJewREA4BEjRREo0iQS9mOy68SHAHzxyLm4/SSbjAAAAAElFTkSuQm
 CC";
 
-//Images return when ?img= GET call
-if(isset($_GET["img"]) && !isset($_GET["dir"])) {
+//Image return for ?image= GET call
+if(isset($_GET["image"]) && !isset($_GET["dir"])) {
 	header("Content-type: image/png");
-	switch(strtolower($_GET["img"])) {
-		default: echo base64_decode($FL_IMAGES["unknown"]); break;
-		case "pdf": echo base64_decode($FL_IMAGES["adobe"]); break;
-		case "7z": case "cab": case "gz": case "gzip": case "rar": case "tar": case "tgz": case "zip": echo base64_decode($FL_IMAGES["archive"]); break;
-		case "aac": case "ac3": case "m4a": case "mid": case "midi": case "mp3": case "ogg": case "wav": case "wave": echo base64_decode($FL_IMAGES["audio"]); break;
-		case "css": case "html": case "php": case "xhtml": case "xml": echo base64_decode($FL_IMAGES["code"]); break;
-		case "ods": case "xls": case "xlsx": echo base64_decode($FL_IMAGES["excel"]); break;
-		case "bmp": case "gif": case "jpe": case "jpg": case "jpeg": case "png": case "tga": case "tif": case "tiff": echo base64_decode($FL_IMAGES["image"]); break; 
-		case "odp": case "ppt": case "pptx": echo base64_decode($FL_IMAGES["ppoint"]); break;
-		case "cfg": case "ini": case "txt": echo base64_decode($FL_IMAGES["text"]); break;
-		case "doc": case "docx": case "odt": echo base64_decode($FL_IMAGES["word"]); break;
-		case "3gp": case "3g2": case "avi": case "m2t": case "mp4": case "mpg": case "mpeg": case "mov": case "wmv": echo base64_decode($FL_IMAGES["video"]); break;
-		case "warning": echo base64_decode($FL_IMAGES["warning"]); break;
-		case "back": echo base64_decode($FL_IMAGES["back"]); break;
-		case "folder": echo base64_decode($FL_IMAGES["folder"]); break;
-		case base64_decode("ZG9wZWZpc2g="): echo base64_decode($FL_IMAGES["nothing"]); break;
+	$icon = "";
+	switch(strtolower($_GET["image"])) {
+		default:
+			$icon = $FL_IMAGES["unknown"]; break;
+		case "pdf":
+			$icon = $FL_IMAGES["adobe"]; break;
+		case "7z": case "cab": case "gz": case "gzip": case "rar": case "tar": case "tgz": case "zip":
+			$icon = $FL_IMAGES["archive"]; break;
+		case "aac": case "ac3": case "m4a": case "mid": case "midi": case "mp3": case "ogg": case "wav": case "wave":
+			$icon = $FL_IMAGES["audio"]; break;
+		case "css": case "html": case "php": case "xhtml": case "xml":
+			$icon = $FL_IMAGES["code"]; break;
+		case "iso": case "img": case "ngr":
+			$icon = $FL_IMAGES["disc"]; break;
+		case "ods": case "xls": case "xlsx":
+			$icon = $FL_IMAGES["excel"]; break;
+		case "bmp": case "gif": case "jpe": case "jpg": case "jpeg": case "png": case "tga": case "tif": case "tiff":
+			$icon = $FL_IMAGES["image"]; break; 
+		case "odp": case "ppt": case "pptx":
+			$icon = $FL_IMAGES["ppoint"]; break;
+		case "cfg": case "ini": case "log": case "txt":
+			$icon = $FL_IMAGES["text"]; break;
+		case "doc": case "docx": case "odt":
+			$icon = $FL_IMAGES["word"]; break;
+		case "3gp": case "3g2": case "avi": case "m2t": case "mp4": case "mpg": case "mpeg": case "mov": case "wmv":
+			$icon = $FL_IMAGES["video"]; break;
+		case "warning":
+			$icon = $FL_IMAGES["warning"]; break;
+		case "back":
+			$icon = $FL_IMAGES["back"]; break;
+		case "folder":
+			$icon = $FL_IMAGES["folder"]; break;
+		case base64_decode("ZG9wZWZpc2g="):
+			$icon = $FL_IMAGES["nothing"]; break;
 	}
-	die;
+	echo base64_decode($icon);
+	die();
 }
 
-//Start of page load time
-if($FL_CONFIG["ShowLoadTime"] == 1) $FL_Time["Start"] = microtime(true);
+//Start of page loading time
+if($FL_CONFIG["showtime"]) $FL_TIME = microtime(true);
 
-//Getting script filename
-$FL_Name = pathinfo(__FILE__)["basename"];
+//Setup variables
+$FL_FOLDER = dirname(__FILE__);
+if($_GET["dir"]) $FL_FOLDER .= "/".$_GET["dir"];
+$FL_FOLDER = rtrim($FL_FOLDER, "/");
+$FL_TRACE = ltrim(str_replace(__DIR__, "", $FL_FOLDER), "/");
+$FL_TRACELIST = explode("/", $FL_TRACE);
+$FL_DIRS = [];
+$FL_FILES = [];
 
-//Password protection session
-if($FL_CONFIG["Password"] !== "") {
-	session_name("FolderList");
-	session_start();
-	if(isset($_POST["password"]) && $_POST["password"] === $FL_CONFIG["Password"]) $_SESSION["FL_LOGIN"] = $FL_CONFIG["Password"];
-	if($_GET["logout"]) {
-		session_destroy();
-		if($_GET["dir"]) header("Location: {$FL_Name}?dir={$_GET["dir"]}");
-		else header("Location: {$FL_Name}");
-		exit;
-	}
-}
-
-//Getting dirs to usage or show
-if($_GET["dir"]) {
-	$FL_Folder = "{$_GET["dir"]}/*";												//Folder to foreach items
-	$FL_FolderCheck = str_replace("*", "", $FL_Folder);								//Folder to check security
-	$FL_FolderLocs = explode("/", $FL_FolderCheck);									//Folder to show localization
-	$FL_FolderUp = explode("/", $_GET["dir"]);
-	$FL_FolderUp = substr(str_replace(end($FL_FolderUp), "", $_GET["dir"]), 0, -1);	//Folder UP
-} else {
-	$FL_Folder = "*";
-	$FL_FolderCheck = "/";
-}
-
-//Checking files and folders
-foreach(glob($FL_Folder, GLOB_BRACE) as $FL_Element) {
-	if(!in_array($FL_Element, $FL_CONFIG["Hidden"])) {
-		if(is_dir($FL_Element)) $FL_Folders[] .= $FL_Element;
-		else $FL_Files[] .= $FL_Element;
-	}
-}
-
-//Function AboveDir to check where user can go
-function AboveDir($dir, $dir_top){
-	if($dir === "/") $dir = __DIR__;
+//Check if user want go too far
+function aboveDir($dir) {
+	$dir_top = __DIR__;	
 	if($dir === $dir_top) return false;
 	$dir = realpath($dir);
-	$dir_top = realpath($dir_top);
+	$dir_top = realpath($dir_top);	
 	$dir = count(explode("/", $dir));
 	$dir_top = count(explode("/", $dir_top));
 	if($dir <= $dir_top) return true;
 	else return false;
 }
 
-//Function DrawTableRow to print correct row in table
-function DrawTableRow($error, $icon, $text, $size) {
-	if($error == 1) echo "<tr class=\"danger\">\n";
-	else echo "<tr>\n";	
-	if(!$icon) echo "<td></td>\n";
-	else echo "<td><img src=\"?img={$icon}\"></td>\n";	
-	echo "<td>{$text}</td>\n";	
-	echo "<td>{$size}</td>\n";
-	echo "</tr>\n";
-}
-
-//Function ShowText with multilang text security
-function ShowText($string) {
+//Return string with multilang text security
+function showText($string) {
 	global $FL_CONFIG;
 	global $FL_TRANSLATION;
-	if(!$FL_TRANSLATION[$FL_CONFIG["Language"]][$string]) return $FL_TRANSLATION["en"][$string];
-	else return $FL_TRANSLATION[$FL_CONFIG["Language"]][$string];
+
+	if(!$FL_TRANSLATION[$FL_CONFIG["lang"]][$string])
+		return $FL_TRANSLATION["en"][$string];
+	else
+		return $FL_TRANSLATION[$FL_CONFIG["lang"]][$string];
 }
 
-//Function Extension to return extension of file
-function Extension($file) {
-	$file = explode(".", strtolower($file));
-	$file = end($file);
-	return $file;
-}
-
-//Function GetFormatedSize to return formated file size
-function GetFormatedSize($file) {
-	$file = filesize($file);
-	if ($file > 1000000000) $file = round($file/1073741824, 2)."&nbsp;GB";
-	else if ($file > 1000000) $file = round($file/1048574, 2)."&nbsp;MB";
-	else if ($file > 1000) $file = round($file/1024, 2)."&nbsp;KB";
-	else $file = $file."&nbsp;B";	
-	return $file;
+//Return formated file size
+function getFormatedSize($size) {
+	if ($size > 1000000000) $size = round($size/1073741824, 0)."&nbsp;GB";
+	else if ($size > 1000000) $size = round($size/1048574, 0)."&nbsp;MB";
+	else if ($size > 1000) $size = round($size/1024, 0)."&nbsp;KB";
+	else $size = $size."&nbsp;B";	
+	return $size;
 }
 
 ?>
+
 <!DOCTYPE html>
-<html lang="<?php echo $FL_CONFIG["Language"]; ?>">
+<html lang="<?php echo $FL_CONFIG["lang"]; ?>">
 <head>
-	<title><?php echo $FL_CONFIG["SiteName"]; ?></title>
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="<?php echo $FL_CONFIG["sitedesc"]; ?>">
 	<meta name="generator" content="FolderList (http://folderlist.kucharskov.pl)">
-	<?php if($FL_CONFIG["SiteDesc"]) { ?><meta name="description" content="<?php echo $FL_CONFIG["SiteDesc"]; ?>"><?php } ?>
-		
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<title><?php echo $FL_CONFIG["sitename"]; ?></title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<style type="text/css">
 	<!--
-	.panel { margin: 10px 0 5px 0; }
-	.panel-heading { padding: 5px 10px; }
-	.panel-heading h1 { text-align: center; margin: 20px 0; word-wrap: break-word; }
-	.panel-heading .breadcrumb { margin: 0; padding: 0; }
-	table.table th { text-align: center; }
-	table.table tr td:last-child { text-align: right; }
-	table.table tr.danger td{ color: #FF0000; }
-	table.table tr td img { vertical-align: text-top; }
-	table.table tr td a { width: 100%; height: 100%; margin: -5px; padding: 5px; display: block; word-break: break-all; }
-	.footer { margin-bottom: 10px; text-align: center; }
+	.card { overflow: hidden; }
+	.card .card-header .breadcrumb { background: none; }
+	.table tr td.size { text-align: right; }
+	.table tr td img { text-align: center; vertical-align: baseline; }
+	.table tr td a { display: block; width: auto; height: auto; }
+	.table tr.table-danger td { color: #F00; }
 	-->
 	</style>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->	
 </head>
 <body>
 
 <div class="container">
-	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1>
-						<?php echo $FL_CONFIG["SiteTitle"]; ?>
-						<?php if($FL_CONFIG["SiteSubTitle"]) { ?><br><small><?php echo $FL_CONFIG["SiteSubTitle"]; ?></small><?php } ?>
-					</h1>
-					
-					<ol class="breadcrumb">
-						<?php
-						if($FL_CONFIG["ShowDir"]) {
-							if(!$_GET["dir"]) {
-								echo "<li class=\"active\">".ShowText("MainFolder")."</li>\n";
-							} else {
-								echo "<li><a href=\"?dir=\">".ShowText("MainFolder")."</a></li>\n";
-								$FL_ManyFolders = count($FL_FolderLocs)-2;
-
-								if(is_dir($FL_FolderCheck)) {
-									for($FL_LocNum = 0; $FL_LocNum <= $FL_ManyFolders; $FL_LocNum++) {
-										if($FL_LocNum == 0) $FL_FolderBack = "{$FL_FolderLocs[$FL_LocNum]}";
-										else $FL_FolderBack .= "/{$FL_FolderLocs[$FL_LocNum]}";
-									
-										if($FL_LocNum == $FL_ManyFolders) echo "<li class=\"active\">{$FL_FolderLocs[$FL_LocNum]}</li>\n";
-										else echo "<li><a href=\"?dir={$FL_FolderBack}\">{$FL_FolderLocs[$FL_LocNum]}</a></li>\n";					
-									}
-								}
-							}
-						}
-						?>
-					</ol>
-				</div>
-				<?php
-				if($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] !== $FL_CONFIG["Password"]) {
-					if(isset($_POST["password"]) && $_POST["password"] !== $FL_CONFIG["Password"]) $FL_LoginError = 1;
-				?>
-				<div class="panel-body">				
-					<form action="<?php echo $FL_Name; if($_GET["dir"]) echo "?dir={$_GET["dir"]}"; ?>" method="post">
-						<div class="row">
-							<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
-								<div class="form-group <?php if($FL_LoginError == 1) echo "has-error"; ?> ">
-									<label class="control-label" for="password">
-									<?php 
-									if($FL_LoginError == 1) echo ShowText("BadPass");
-									else echo ShowText("LoginToSee");
-									?>
-									</label>
-									<div class="input-group">
-										<input type="password" name="password" id="password" class="form-control">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit"><?php echo ShowText("login"); ?></button>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				<?php
+<div class="row justify-content-center">
+<div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 mt-3">
+<div class="card">
+	<div class="card-header text-center">
+		<h1><?php echo $FL_CONFIG["heading"]; ?></h1>
+		<?php if($FL_CONFIG["subheading"] !== "") { ?>
+		<p class="h4 text-muted"><?php echo $FL_CONFIG["subheading"]; ?></p>
+		<?php } ?>
+		
+		<?php
+		if($FL_CONFIG["showdir"]) {
+		?>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb p-0 m-0 mt-3">
+			<?php
+			if(!$_GET["dir"]) {
+				echo "<li class='breadcrumb-item active'>".showText("root")."</li>";
+			} else {
+				//Displaying first element
+				echo "<li class='breadcrumb-item'><a href='?dir='>".showText("root")."</a></li>";
+				
+				//Generating tracelist folders
+				if(is_dir($FL_FOLDER)) {
+					$count = count($FL_TRACELIST);
+					for($i = 0; $i < $count-1; $i++) {
+						$dir = implode("/", array_slice($FL_TRACELIST, 0, $i+1));
+						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$FL_TRACELIST[$i]."</a></li>";
+					}
+					echo "<li class='breadcrumb-item active'>".$FL_TRACELIST[$count-1]."</a></li>";
 				}
-
-				if($FL_CONFIG["Password"] === "" || ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"])) {
-				?>
-				<table class="table table-condensed table-striped table-hover">
-					<thead>
-						<tr>
-							<th scope="col"></th>
-							<th class="col-lg-10 col-md-10 col-sm-10 col-xs-10" scope="col"><?php echo ShowText("FileName"); ?></th>
-							<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2" scope="col"><?php echo ShowText("FileSize"); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						if(AboveDir($FL_FolderCheck, __DIR__)) {
-							DrawTableRow(0, "back", "<a href=\"?dir=\">..</a>", "");
-							DrawTableRow(1, "warning", ShowText("NoAccess"), "");
-						} else {
-							if($_GET["dir"]) DrawTableRow(0, "back", "<a href=\"?dir={$FL_FolderUp}\">..</a>", "");
-							if(count($FL_Folders) == 0 && count($FL_Files) == 0) {
-								DrawTableRow(1, "warning", ShowText("NoFiles"), "");
-							} else {
-								if(count($FL_Folders) != 0) {
-									foreach($FL_Folders as $FL_Folder) {
-										$FL_FolderName = str_replace("{$_GET["dir"]}/", "", $FL_Folder);
-										DrawTableRow(0, "folder", "<a href=\"?dir={$FL_Folder}\">{$FL_FolderName}</a>", "");
-									}
-								}
-								if(count($FL_Files) != 0) {
-									foreach($FL_Files as $FL_File) {
-										$FL_FileName = str_replace("{$_GET["dir"]}/", "", $FL_File);
-										DrawTableRow(0, Extension($FL_FileName), "<a href=\"{$FL_File}\">{$FL_FileName}</a>", GetFormatedSize($FL_File));
-									}
-								}
-							}
-						}
-						?>
-					</tbody>
-				</table>
-				<?php
-				}
-				?>
-			</div>
-		</div>
+			}
+			?>
+			</ol>
+		</nav>
+		<?php } ?>
 	</div>
+	<div class="card-body p-0">
+		<table class="table table-striped table-hover table-sm table-responsive m-0">
+			<thead class="text-center">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col" class="col-10"><?php echo showText("filename"); ?></th>
+					<th scope="col"><?php echo showText("filesize"); ?></th>
+				</tr>
+			</thead>
+			<tbody>
 
-	<div class="row">
-		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-			<div class="col-lg-10 col-lg-offset-1 col-md-12 col-xm-12 col-xs-12 footer">
-				<?php
-				if($FL_CONFIG["ShowLoadTime"] == 1) {
-					$FL_Time["End"] = microtime(true);
-					$FL_Time = round(($FL_Time["End"]-$FL_Time["Start"]), 2);
+			<?php
+			//Checking folder
+			if(!is_dir($FL_FOLDER) || aboveDir($FL_FOLDER)) {
+				echo "<tr>";
+				echo "<td><img src='?image=back'></td>";
+				echo "<td colspan='2'><a href='?dir='>..</a></td>";
+				echo "</tr>";
 					
-					$FL_Time = str_replace("[FL_TIME]", $FL_Time, ShowText("LoadTime"));
-					echo "{$FL_Time} | ";
+				echo "<tr class='table-danger'>";
+				echo "<td><img src='?image=warning'></td>";
+				echo "<td colspan='2'>".showText("noaccess")."</td>";
+				echo "</tr>";
+			} else {
+				//Generating "back" row
+				if($_GET["dir"]) {
+					$back = substr(str_replace(end($FL_TRACELIST), "", $FL_TRACE), 0, -1);
+					echo "<tr>";
+					echo "<td><img src='?image=back'></td>";
+					echo "<td colspan='2'><a href='?dir={$back}'>..</a></td>";
+					echo "</tr>";
 				}
-				?>
-				<a target="_blank" href="https://github.com/Kucharskov/FolderList">FolderList</a>
-				<?php
-				if ($FL_CONFIG["Password"] !== "" && $_SESSION["FL_LOGIN"] === $FL_CONFIG["Password"]) {
-					if($_GET["dir"]) echo " | <a href=\"?dir={$_GET["dir"]}&logout=1\">".ShowText("logout")."</a>";
-					else echo " | <a href=\"?logout=1\">".ShowText("logout")."</a>";
+				
+				//Getting data from directory
+				foreach(new DirectoryIterator($FL_FOLDER) as $element) {
+					//Skip dots
+					if($element->isDot()) continue;
+					if($element->isFile()) {
+						//Skip self file from listing
+						if(!$_GET["dir"] && $element->getFilename() === pathinfo(__FILE__)["basename"]) continue;
+						
+						//If file is not hidden add to array
+						if(!in_array($element->getFilename(), $FL_CONFIG["hiddenfiles"])) {
+							array_push($FL_FILES, [
+								"name" => $element->getFilename(),
+								"size" => $element->getSize(),
+								"ext" => $element->getExtension()
+							]);
+						}
+					}
+					if($element->isDir()) {
+						//If dir is not hidden add to array
+						if(!in_array($element->getFilename(), $FL_CONFIG["hiddendirs"])) {
+							array_push($FL_DIRS, [
+								"name" => $element->getFilename()
+							]);
+						}
+					}
 				}
-				?>
-			</div>
-		</div>
-	</div>	
+				//Sorting elements
+				usort($FL_DIRS, function($a, $b) {
+					return strtolower($a["name"]) <=> strtolower($b["name"]);
+				});
+				usort($FL_FILES, function($a, $b) {
+					return strtolower($a["name"]) <=> strtolower($b["name"]);
+				});
+				
+				//Empty folder info
+				if(count($FL_FILES) === 0 && count($FL_DIRS) === 0) {
+					echo "<tr class='table-danger'>";
+					echo "<td><img src='?image=warning'></td>";
+					echo "<td colspan='2'>".showText("nofiles")."</td>";
+					echo "</tr>";
+				}
+			}
+
+			//Fix for missing last "/"
+			if($_GET["dir"]) $FL_TRACE .= "/";
+			
+			//Displaying dirs
+			foreach($FL_DIRS as $dir) {
+				echo "<tr>";
+				echo "<td><img src='?image=folder'></td>";
+				echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'>{$dir["name"]}</a></td>";
+				echo "</tr>";
+			}
+
+			//Displaying files
+			foreach($FL_FILES as $file) {
+				echo "<tr>";
+				echo "<td><img src='?image={$file["ext"]}'></td>";
+				echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["name"]}</a></td>";
+				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
+				echo "</tr>";
+			}
+			?>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+</div>
+<div class="row justify-content-center">
+<div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 text-center mb-3">
+	<?php
+	//End of page loading time measurement
+	if($FL_CONFIG["showtime"]) {
+		$FL_TIME = round((microtime(true) - $FL_TIME), 2);
+		$FL_TIME = str_replace("[FL_TIME]", $FL_TIME, showText("loadtime"));
+		echo "{$FL_TIME} |";
+	}
+	?>
+	<a target="_blank" href="https://github.com/Kucharskov/FolderList">FolderList</a>
+</div>
+</div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
