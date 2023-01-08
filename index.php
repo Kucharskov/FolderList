@@ -375,7 +375,7 @@ function getFormatedSize($size) {
 			<thead class="text-center">
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col" class="col-10"><?php echo showText("filename"); ?></th>
+					<th scope="col" class="col-12"><?php echo showText("filename"); ?></th>
 					<th scope="col"><?php echo showText("filesize"); ?></th>
 				</tr>
 			</thead>
