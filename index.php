@@ -417,7 +417,7 @@ function getFormatedSize($size) {
 						
 						//If file is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddenfiles"])) {
-							$age = (int)((time() - filemtime($element->getPathname()))/ 86400);
+							$age = (int)((time() - filectime($element->getPathname()))/ 86400);
 							
 							array_push($FL_FILES, [
 								"name" => $element->getFilename(),
@@ -430,7 +430,7 @@ function getFormatedSize($size) {
 					if($element->isDir()) {
 						//If dir is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddendirs"])) {
-							$age = (int)((time() - filemtime($element->getPathname()))/ 86400);
+							$age = (int)((time() - filectime($element->getPathname()))/ 86400);
 							
 							array_push($FL_DIRS, [
 								"name" => $element->getFilename(),
