@@ -481,7 +481,7 @@ function getFormatedSize($size) {
 				if($FL_CONFIG["agebadge"] !== 0 && $file["age"] < $FL_CONFIG["agebadge"]) {
 					echo "<td><a href='{$FL_TRACE}{$file["name"]}'><span class='badge badge-danger'>".showText("new")."</span>{$file["name"]}</a></td>";
 				} else {
-					echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["age"]} {$file["name"]}</a></td>";
+					echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["name"]}</a></td>";
 				}
 				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
