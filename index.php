@@ -332,6 +332,7 @@ function getFormatedSize($size) {
 	.table tr td img { text-align: center; vertical-align: baseline; }
 	.table tr td a { display: block; width: auto; height: auto; }
 	.table tr.table-danger td { color: #F00; }
+	.badge { margin-right: 0.4em; }
 	-->
 	</style>
 </head>
