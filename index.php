@@ -41,6 +41,9 @@ $FL_CONFIG["showdir"] = true;
 //Displaing page load time (true/false)
 $FL_CONFIG["showtime"] = false;
 
+//Displaing "new" badge for files and dris (amount of days, 0 to disable)
+$FL_CONFIG["agebadge"] = 7;
+
 //Hidden dirs and files
 $FL_CONFIG["hiddendirs"] = [".well-known"];
 $FL_CONFIG["hiddenfiles"] = [".htaccess", ".htpasswd"];
@@ -54,6 +57,7 @@ $FL_TRANSLATION["en"] = [
 	"filename" => "Filename",
 	"filesize" => "Size",
 	"root" => "Home",
+	"new" => "New",
 	"loadtime" => "Loaded in [FL_TIME] ms",
 	"nofiles" => "No files in selected folder!",
 	"noaccess" => "You dont have access to selected folder!"
@@ -459,7 +463,11 @@ function getFormatedSize($size) {
 			foreach($FL_DIRS as $dir) {
 				echo "<tr>";
 				echo "<td><img src='?image=folder'></td>";
-				echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'>{$dir["name"]}</a></td>";
+				if($FL_CONFIG["agebadge"] !== 0 && $dir["age"] < $FL_CONFIG["agebadge"]) {
+					echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'><span class='badge badge-danger'>".showText("new")."</span>{$dir["name"]}</a></td>";
+				} else {
+					echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'>{$dir["name"]}</a></td>";
+				}
 				echo "</tr>";
 			}
 
@@ -467,7 +475,11 @@ function getFormatedSize($size) {
 			foreach($FL_FILES as $file) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
-				echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["name"]}</a></td>";
+				if($FL_CONFIG["agebadge"] !== 0 && $file["age"] < $FL_CONFIG["agebadge"]) {
+					echo "<td><a href='{$FL_TRACE}{$file["name"]}'><span class='badge badge-danger'>".showText("new")."</span>{$file["name"]}</a></td>";
+				} else {
+					echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["age"]} {$file["name"]}</a></td>";
+				}
 				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
 			}
