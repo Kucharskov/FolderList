@@ -314,6 +314,13 @@ function getFormatedSize($size) {
 	return $size;
 }
 
+//Return function to compare objects by selected key
+function buildSorterByKey($key) {
+    return function ($a, $b) use ($key) {
+		return strcasecmp($a[$key], $b[$key]);
+	};
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -443,12 +450,8 @@ function getFormatedSize($size) {
 					}
 				}
 				//Sorting elements
-				usort($FL_DIRS, function($a, $b) {
-					return strtolower($a["name"]) <=> strtolower($b["name"]);
-				});
-				usort($FL_FILES, function($a, $b) {
-					return strtolower($a["name"]) <=> strtolower($b["name"]);
-				});
+				usort($FL_DIRS, buildSorterByKey("name"));
+				usort($FL_FILES, buildSorterByKey("name"));
 				
 				//Empty folder info
 				if(count($FL_FILES) === 0 && count($FL_DIRS) === 0) {
