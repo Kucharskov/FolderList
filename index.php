@@ -26,7 +26,7 @@ $FL_CONFIG["lang"] = "en";
 //Content of H1 at page
 $FL_CONFIG["heading"] = "Page powered by FolderList";
 
-//Content of sub H1 at page (to hide leave empty)
+//Content of subheading P at page (to hide leave empty)
 $FL_CONFIG["subheading"] = "List any file of the folder";
 
 //SEO: Title tag
@@ -41,7 +41,7 @@ $FL_CONFIG["showdir"] = true;
 //Displaing page load time (true/false)
 $FL_CONFIG["showtime"] = false;
 
-//Displaing "new" badge for files and dris (amount of days, 0 to disable)
+//Displaing "new" badge for files and dirs (amount of days, 0 to disable)
 $FL_CONFIG["agebadge"] = 7;
 
 //Hidden dirs and files
@@ -286,12 +286,13 @@ $FL_FILES = [];
 function aboveDir($dir) {
 	$dir_top = __DIR__;	
 	if($dir === $dir_top) return false;
+	
 	$dir = realpath($dir);
 	$dir_top = realpath($dir_top);	
 	$dir = count(explode("/", $dir));
 	$dir_top = count(explode("/", $dir_top));
-	if($dir <= $dir_top) return true;
-	else return false;
+	
+	return $dir <= $dir_top;
 }
 
 //Return string with multilang text security
@@ -299,10 +300,11 @@ function showText($string) {
 	global $FL_CONFIG;
 	global $FL_TRANSLATION;
 
-	if(!$FL_TRANSLATION[$FL_CONFIG["lang"]][$string])
+	if(!$FL_TRANSLATION[$FL_CONFIG["lang"]][$string]) {
 		return $FL_TRANSLATION["en"][$string];
-	else
+	} else {
 		return $FL_TRANSLATION[$FL_CONFIG["lang"]][$string];
+	}
 }
 
 //Return formated file size
@@ -311,6 +313,7 @@ function getFormatedSize($size) {
 	else if ($size > 1000000) $size = round($size/1048574, 0)."&nbsp;MB";
 	else if ($size > 1000) $size = round($size/1024, 0)."&nbsp;KB";
 	else $size = $size."&nbsp;B";	
+	
 	return $size;
 }
 
@@ -427,7 +430,7 @@ function buildSorterByKey($key) {
 						
 						//If file is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddenfiles"])) {
-							$age = (int)((time() - filectime($element->getPathname()))/ 86400);
+							$age = (int)((time() - filectime($element->getPathname())) / 86400);
 							
 							array_push($FL_FILES, [
 								"name" => $element->getFilename(),
@@ -440,7 +443,7 @@ function buildSorterByKey($key) {
 					if($element->isDir()) {
 						//If dir is not hidden add to array
 						if(!in_array($element->getFilename(), $FL_CONFIG["hiddendirs"])) {
-							$age = (int)((time() - filectime($element->getPathname()))/ 86400);
+							$age = (int)((time() - filectime($element->getPathname())) / 86400);
 							
 							array_push($FL_DIRS, [
 								"name" => $element->getFilename(),
