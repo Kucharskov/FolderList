@@ -85,6 +85,17 @@ $FL_TRANSLATION["ru"] = [
 	"noaccess" => "Нет доступа к избранному фолдеру!"
 ];
 
+//German by r0BIT
+$FL_TRANSLATION["de"] = [
+    "filename" => "Dateiname",
+    "filesize" => "Größe",
+    "root" => "Home",
+    "new" => "Neu",
+    "loadtime" => "Geladen in [FL_TIME] ms",
+    "nofiles" => "Keine Dateien im angegebenen Ordnerpfad!",
+    "noaccess" => "Sie haben keinen Zugriff auf den angegebenen Ordner!"
+];
+
 /***************************/
 /* Main code of FolderList */
 /* YOU'RE EDITING THIS AT  */
