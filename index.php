@@ -388,9 +388,9 @@ function buildSorterByKey($key) {
 					$count = count($FL_TRACELIST);
 					for($i = 0; $i < $count-1; $i++) {
 						$dir = implode("/", array_slice($FL_TRACELIST, 0, $i+1));
-						echo "<li class='breadcrumb-item'><a href='?dir=".$dir."'>".$FL_TRACELIST[$i]."</a></li>";
+						echo "<li class='breadcrumb-item'><a href='?dir=".rawurlencode($dir)."'>".$FL_TRACELIST[$i]."</a></li>\n";
 					}
-					echo "<li class='breadcrumb-item active'>".$FL_TRACELIST[$count-1]."</a></li>";
+					echo "<li class='breadcrumb-item active'>".$FL_TRACELIST[$count-1]."</a></li>\n";
 				}
 			}
 			?>
@@ -414,12 +414,12 @@ function buildSorterByKey($key) {
 			if(!is_dir($FL_FOLDER) || aboveDir($FL_FOLDER)) {
 				echo "<tr>";
 				echo "<td><img src='?image=back'></td>";
-				echo "<td colspan='2'><a href='?dir='>..</a></td>";
+				echo "<td colspan='2'><a href='?dir='>..</a></td>\n";
 				echo "</tr>";
 					
 				echo "<tr class='table-danger'>";
 				echo "<td><img src='?image=warning'></td>";
-				echo "<td colspan='2'>".showText("noaccess")."</td>";
+				echo "<td colspan='2'>".showText("noaccess")."</td>\n";
 				echo "</tr>";
 			} else {
 				//Generating "back" row
@@ -427,7 +427,7 @@ function buildSorterByKey($key) {
 					$back = substr(str_replace(end($FL_TRACELIST), "", $FL_TRACE), 0, -1);
 					echo "<tr>";
 					echo "<td><img src='?image=back'></td>";
-					echo "<td colspan='2'><a href='?dir={$back}'>..</a></td>";
+					echo "<td colspan='2'><a href='?dir=".rawurlencode($back)."'>..</a></td>\n";
 					echo "</tr>";
 				}
 				
@@ -484,9 +484,9 @@ function buildSorterByKey($key) {
 				echo "<tr>";
 				echo "<td><img src='?image=folder'></td>";
 				if($FL_CONFIG["agebadge"] !== 0 && $dir["age"] < $FL_CONFIG["agebadge"]) {
-					echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'><span class='badge badge-danger'>".showText("new")."</span>{$dir["name"]}</a></td>";
+					echo "<td colspan='2'><a href='?dir=".rawurlencode($FL_TRACE.$dir["name"])."'><span class='badge badge-danger'>".showText("new")."</span>{$dir["name"]}</a></td>\n";
 				} else {
-					echo "<td colspan='2'><a href='?dir={$FL_TRACE}{$dir["name"]}'>{$dir["name"]}</a></td>";
+					echo "<td colspan='2'><a href='?dir=".rawurlencode($FL_TRACE.$dir["name"])."'>{$dir["name"]}</a></td>\n";
 				}
 				echo "</tr>";
 			}
@@ -496,9 +496,9 @@ function buildSorterByKey($key) {
 				echo "<tr>";
 				echo "<td><img src='?image={$file["ext"]}'></td>";
 				if($FL_CONFIG["agebadge"] !== 0 && $file["age"] < $FL_CONFIG["agebadge"]) {
-					echo "<td><a href='{$FL_TRACE}{$file["name"]}'><span class='badge badge-danger'>".showText("new")."</span>{$file["name"]}</a></td>";
+					echo "<td><a href='".rawurlencode($FL_TRACE.$file["name"])."'><span class='badge badge-danger'>".showText("new")."</span>{$file["name"]}</a></td>\n";
 				} else {
-					echo "<td><a href='{$FL_TRACE}{$file["name"]}'>{$file["name"]}</a></td>";
+					echo "<td><a href='".rawurlencode($FL_TRACE.$file["name"])."'>{$file["name"]}</a></td>\n";
 				}
 				echo "<td class='size'>".getFormatedSize($file["size"])."</td>";
 				echo "</tr>";
